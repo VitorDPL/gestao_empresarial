@@ -1,4 +1,3 @@
-com\mycompany\gestaoempresarial\clientes\EditarClientesController.class
 com\mycompany\gestaoempresarial\ExibirClientesController.class
 com\mycompany\gestaoempresarial\App.class
 example\DAO\DaoGenerics.class
@@ -10,3 +9,4 @@ module-info.class
 example\DAO\ClientesDAO.class
 com\mycompany\gestaoempresarial\SecondaryController.class
 com\mycompany\gestaoempresarial\Usuarios\Segmento.class
+com\mycompany\gestaoempresarial\EditarClientesController.class

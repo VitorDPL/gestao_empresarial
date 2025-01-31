@@ -37,6 +37,6 @@
          </font>
       </Label>
       <Button layoutX="14.0" layoutY="271.0" mnemonicParsing="false" onAction="#exibirClientes" prefHeight="156.0" prefWidth="223.0" text="Exibir Clientes" />
-     
+      <Button layoutX="14.0" layoutY="460.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="156.0" prefWidth="223.0" text="Editar Clientes" />
    </children>
 </AnchorPane>

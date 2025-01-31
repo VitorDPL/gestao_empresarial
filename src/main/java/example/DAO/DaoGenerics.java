@@ -10,5 +10,5 @@ public interface DaoGenerics<C, K> {
 
     public ArrayList<C> buscarTodos() throws ClassNotFoundException, SQLException;
 
-    public C atualizar(C obj) throws ClassNotFoundException, SQLException;
+    public C editar(C obj, String cpf_cnpj) throws ClassNotFoundException, SQLException;
 }

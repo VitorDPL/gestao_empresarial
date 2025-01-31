@@ -9,8 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class ClientesDAO implements DaoGenerics<Cliente, Integer> {
+public class ClientesDAO implements DaoGenerics<Cliente, String> {
 
     @Override
     public void inserir(Cliente obj) throws ClassNotFoundException, SQLException {
@@ -52,23 +53,60 @@ public class ClientesDAO implements DaoGenerics<Cliente, Integer> {
 
     }
 
-    public Cliente atualizar(Cliente obj) throws ClassNotFoundException, SQLException {
+    public Cliente editar(Cliente obj, String cpf_cnpj) throws ClassNotFoundException, SQLException {
         Connection c = ConnectionFactory.getConnection();
 
-        String sql = "UPDATE clientes SET nome = ?, endereco = ?, telefone = ?, email = ?, segmento = ? WHERE cpf_cnpj = ?";
+        // Criando a consulta de atualização inicial
+        StringBuilder sql = new StringBuilder("UPDATE clientes SET ");
+        List<Object> parametros = new ArrayList<>();
 
-        PreparedStatement pst = c.prepareStatement(sql);
-        pst.setString(1, obj.getNome());
-        pst.setString(2, obj.getEndereco());
-        pst.setString(3, obj.getTelefone());
-        pst.setString(4, obj.getEmail());
-        pst.setString(5, obj.getSegmento().toString());
-        pst.setString(6, obj.getCpf_cnpj());
+        // Verifica e adiciona cada campo à consulta apenas se não estiver em branco
+        if (obj.getNome() != null && !obj.getNome().isEmpty()) {
+            sql.append("nome = ?, ");
+            parametros.add(obj.getNome());
+        }
+        if (obj.getEndereco() != null && !obj.getEndereco().isEmpty()) {
+            sql.append("endereco = ?, ");
+            parametros.add(obj.getEndereco());
+        }
+        if (obj.getTelefone() != null && !obj.getTelefone().isEmpty()) {
+            sql.append("telefone = ?, ");
+            parametros.add(obj.getTelefone());
+        }
+        if (obj.getEmail() != null && !obj.getEmail().isEmpty()) {
+            sql.append("email = ?, ");
+            parametros.add(obj.getEmail());
+        }
+        if (obj.getSegmento() != null) {
+            sql.append("segmento = ?, ");
+            parametros.add(obj.getSegmento().toString());
+        }
 
-        pst.executeUpdate();
+        // Remover a última vírgula e espaço da consulta
+        sql.setLength(sql.length() - 2);
+
+        // Adiciona a condição WHERE para o CPF/CNPJ
+        sql.append(" WHERE cpf_cnpj = ?");
+
+        // Adiciona o CPF/CNPJ como o último parâmetro
+        parametros.add(cpf_cnpj);
+
+        // Preparando a consulta
+        PreparedStatement stmt = c.prepareStatement(sql.toString());
+
+        // Definindo os parâmetros na consulta
+        for (int i = 0; i < parametros.size(); i++) {
+            stmt.setObject(i + 1, parametros.get(i));
+        }
+
+        // Executa a atualização
+        stmt.executeUpdate();
+        stmt.close();
+        c.close();
 
         return obj;
     }
+
 
     public Cliente buscarPorCpfCnpj(String cpf_cnpj) throws ClassNotFoundException, SQLException {
         Connection c = ConnectionFactory.getConnection();
@@ -109,16 +147,15 @@ public class ClientesDAO implements DaoGenerics<Cliente, Integer> {
     }
 
     public static void main(String[] args) {
-
-        try{
-            // buscando por cpf
+        //editar cliente cpf 1049185654
+        try {
             ClientesDAO dao = new ClientesDAO();
             Cliente cliente = dao.buscarPorCpfCnpj("1049185654");
-            System.out.println(cliente.getNome());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            cliente.setNome("Novo Nome");
+            dao.editar(cliente, "1049185654");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
+
     }
 }
