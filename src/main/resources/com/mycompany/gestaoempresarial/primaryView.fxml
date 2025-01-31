@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -7,9 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="886.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.PrimaryController">
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="886.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Button layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#cadastrarCliente" prefHeight="156.0" prefWidth="223.0" text="Cadastrar Cliente" />
       <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="542.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -34,5 +36,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <Button layoutX="14.0" layoutY="271.0" mnemonicParsing="false" onAction="#exibirClientes" prefHeight="156.0" prefWidth="223.0" text="Exibir Clientes" />
+     
    </children>
 </AnchorPane>

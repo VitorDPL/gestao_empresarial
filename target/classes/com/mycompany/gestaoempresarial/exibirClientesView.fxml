@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.ExibirClientesController">
+   <!-- Menu Bar -->
+   <MenuBar prefHeight="30.0" prefWidth="900.0" >
+     <menus>
+       <Menu mnemonicParsing="false" text="File" style="-fx-text-fill: #FFFFFF;">
+         <items>
+           <MenuItem mnemonicParsing="false" text="Close" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Edit" style="-fx-text-fill: #FFFFFF;">
+         <items>
+           <MenuItem mnemonicParsing="false" text="Delete" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Help" style="-fx-text-fill: #FFFFFF;">
+         <items>
+           <MenuItem mnemonicParsing="false" text="About" />
+         </items>
+       </Menu>
+     </menus>
+   </MenuBar>
+    
+   <!-- Header -->
+   <Pane layoutY="30.0" prefHeight="50.0" prefWidth="900.0" style="-fx-background-color: #002D62; -fx-border-color: #E0E0E0;">
+      <children>
+           <Label layoutX="350.0" layoutY="15.0" style="-fx-text-fill: #FFFFFF; -fx-font-size: 18px; -fx-font-weight: bold;" text="Clientes Cadastrados" />
+      </children>
+   </Pane>
+
+    <RadioButton fx:id="radioNome" layoutX="143.0" layoutY="104.0" mnemonicParsing="false" text="Nome" />
+    <RadioButton fx:id="radioCPF" layoutX="265.0" layoutY="104.0" mnemonicParsing="false" text="CPF/CNPJ" />
+    <TextField fx:id="campoPesquisa" layoutX="615.0" layoutY="100.0" />
+    <Button fx:id="botaoPesquisar" layoutX="773.0" layoutY="100.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" text="Pesquisar" style="-fx-background-color: #F57C00; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" />
+
+   <!-- Table View -->
+   <TableView fx:id="tabelaClientes" layoutY="140.0" prefHeight="400.0" prefWidth="900.0" style="-fx-border-color: #A6A6A6; -fx-border-width: 1px; -fx-background-color: #FFFFFF;">
+     <columns>
+         <TableColumn fx:id="colNome" prefWidth="200" text="Nome" />
+         <TableColumn fx:id="colCPF" prefWidth="150" text="CPF/CNPJ" />
+         <TableColumn fx:id="colTelefone" prefWidth="150" text="Telefone" />
+         <TableColumn fx:id="colEmail" prefWidth="200" text="Email" />
+         <TableColumn fx:id="colEndereco" prefWidth="200" text="Endereço" />
+         <TableColumn fx:id="colSegmento" prefWidth="200" text="Segmento" />
+     </columns>
+   </TableView>
+   <Separator layoutY="550.0" prefHeight="0.0" prefWidth="900.0" AnchorPane.rightAnchor="0.0" />
+</AnchorPane>

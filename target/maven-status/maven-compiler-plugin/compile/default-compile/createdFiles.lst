@@ -1,8 +1,12 @@
-module-info.class
+com\mycompany\gestaoempresarial\clientes\EditarClientesController.class
+com\mycompany\gestaoempresarial\ExibirClientesController.class
 com\mycompany\gestaoempresarial\App.class
-example\DAO\ClientesDAO.class
 example\DAO\DaoGenerics.class
-com\mycompany\gestaoempresarial\SecondaryController.class
 example\banco\ConnectionFactory.class
-com\mycompany\gestaoempresarial\Cliente.class
+com\mycompany\gestaoempresarial\Usuarios\Cliente.class
 com\mycompany\gestaoempresarial\PrimaryController.class
+com\mycompany\gestaoempresarial\CadastrarClientesController.class
+module-info.class
+example\DAO\ClientesDAO.class
+com\mycompany\gestaoempresarial\SecondaryController.class
+com\mycompany\gestaoempresarial\Usuarios\Segmento.class
