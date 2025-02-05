@@ -19,7 +19,7 @@ public class PrimaryController {
         stage.setTitle("Cadastrar Cliente");
 
         // Configurar a janela com a função reutilizável da classe App
-        App.configurarJanela(stage);
+        App.configurarJanela(stage, 900, 600);
 
         // Configurar a cena e mostrar a nova janela
         stage.setScene(new Scene(root));
@@ -36,7 +36,7 @@ public class PrimaryController {
         stage.setTitle("Exibir Clientes");
 
         // Configurar a janela com a função reutilizável da classe App
-        App.configurarJanela(stage);
+        App.configurarJanela(stage, 1200, 600);
 
         // Configurar a cena e mostrar a nova janela
         stage.setScene(new Scene(root));
@@ -53,10 +53,15 @@ public class PrimaryController {
         stage.setTitle("Editar Clientes");
 
         // Configurar a janela com a função reutilizável da classe App
-        App.configurarJanela(stage);
+        App.configurarJanela(stage, 900, 600);
 
         // Configurar a cena e mostrar a nova janela
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    @FXML
+    private void deletarClientes() throws IOException {
+        System.out.println("Clicou em deletar");
     }
 }

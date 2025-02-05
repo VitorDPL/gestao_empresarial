@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Screen;
+import javafx.geometry.Rectangle2D;
 
 import java.io.IOException;
 
@@ -17,12 +19,17 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // Tamanho da janela principal
-        scene = new Scene(loadFXML("primaryView"), 900, 600);
+        // Obtém as dimensões da tela do usuário
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
+        // Define a cena com o tamanho da tela
+        scene = new Scene(FXMLLoader.load(getClass().getResource("primaryView.fxml")),
+                           screenBounds.getWidth(), screenBounds.getHeight());
+
         stage.setScene(scene);
 
-        // Tamanho mínimo para a janela principal
-        configurarJanela(stage);
+        // Define o tamanho mínimo, mas sem limitar o máximo
+        configurarJanela(stage, 900, 700);
 
         stage.show();
     }
@@ -37,13 +44,9 @@ public class App extends Application {
     }
 
     // Função para configurar as propriedades da janela (Stage)
-    public static void configurarJanela(Stage stage) {
-        stage.setWidth(900);
-        stage.setHeight(700);
-        stage.setMinWidth(900);
-        stage.setMinHeight(700);
-        stage.setMaxWidth(900);
-        stage.setMaxHeight(700);
+    public static void configurarJanela(Stage stage, int minWidth, int minHeight) {
+        stage.setMinWidth(minWidth);
+        stage.setMinHeight(minHeight);
     }
 
     public static void main(String[] args) {

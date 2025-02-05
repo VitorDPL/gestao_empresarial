@@ -5,13 +5,18 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="886.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.PrimaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="846.0" prefWidth="886.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.PrimaryController">
 
    <children>
-      <Button layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#cadastrarCliente" prefHeight="156.0" prefWidth="223.0" text="Cadastrar Cliente" />
+      <Button alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#cadastrarCliente" prefHeight="156.0" prefWidth="223.0" text="Cadastrar Cliente" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="542.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -31,12 +36,43 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="27.0" prefHeight="45.0" prefWidth="563.0" style="-fx-background-color: #E0E0E0;" text="Bem-Vindo ao sistema!" textAlignment="CENTER" textFill="#002d62" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Label alignment="CENTER" layoutX="14.0" layoutY="27.0" prefHeight="45.0" prefWidth="563.0" style="-fx-background-color: #E0E0E0;" text="{{ nome }}!" textAlignment="CENTER" textFill="#002d62" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="271.0" mnemonicParsing="false" onAction="#exibirClientes" prefHeight="156.0" prefWidth="223.0" text="Exibir Clientes" />
-      <Button layoutX="14.0" layoutY="460.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="156.0" prefWidth="223.0" text="Editar Clientes" />
+      <Button alignment="BASELINE_RIGHT" layoutX="14.0" layoutY="278.0" mnemonicParsing="false" onAction="#exibirClientes" prefHeight="156.0" prefWidth="223.0" text="Exibir Clientes">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button alignment="BASELINE_RIGHT" layoutX="14.0" layoutY="460.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="156.0" prefWidth="223.0" text="Editar Clientes">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <ImageView fitHeight="87.0" fitWidth="101.0" layoutX="33.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="101.0" fitWidth="106.0" layoutX="20.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/search.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="123.0" fitWidth="101.0" layoutX="21.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/update.png" />
+         </image>
+      </ImageView>
+      <Button alignment="BASELINE_RIGHT" layoutX="14.0" layoutY="641.0" mnemonicParsing="false" onAction="#deletarClientes" prefHeight="156.0" prefWidth="223.0" text="Deletar Clientes">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="101.0" fitWidth="101.0" layoutX="26.0" layoutY="676.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/delete.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

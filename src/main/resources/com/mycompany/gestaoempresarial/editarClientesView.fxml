@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Pos?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.EditarClientesController">
    
    <!-- Menu Bar -->
-   <MenuBar prefHeight="30.0" prefWidth="900.0" >
+   <MenuBar prefHeight="30.0" prefWidth="900.0">
      <menus>
-       <Menu mnemonicParsing="false" text="File" style="-fx-text-fill: #FFFFFF;">
+       <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="File">
          <items>
            <MenuItem mnemonicParsing="false" text="Close" />
          </items>
        </Menu>
-       <Menu mnemonicParsing="false" text="Edit" style="-fx-text-fill: #FFFFFF;">
+       <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="Edit">
          <items>
            <MenuItem mnemonicParsing="false" text="Delete" />
          </items>
        </Menu>
-       <Menu mnemonicParsing="false" text="Help" style="-fx-text-fill: #FFFFFF;">
+       <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="Help">
          <items>
            <MenuItem mnemonicParsing="false" text="About" />
          </items>
@@ -29,16 +44,17 @@
    <!-- Header -->
    <Pane layoutY="30.0" prefHeight="50.0" prefWidth="900.0" style="-fx-background-color: #002D62; -fx-border-color: #E0E0E0;">
       <children>
-           <Label layoutX="350.0" layoutY="15.0" style="-fx-text-fill: #FFFFFF; -fx-font-size: 18px; -fx-font-weight: bold;" text="Editar Cliente" />
+           <Label alignment="CENTER" contentDisplay="CENTER" layoutY="1.0" prefHeight="50.0" prefWidth="900.0" style="-fx-text-fill: #FFFFFF; -fx-font-size: 18px; -fx-font-weight: bold;" text="Editar Cliente" />
       </children>
    </Pane>
 
    <!-- Search Options -->
-   <HBox layoutX="20.0" layoutY="100.0" spacing="10.0" alignment="CENTER_LEFT">
+   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="100.0" spacing="10.0">
+      <!-- Alinhando os elementos de forma igual -->
       <RadioButton fx:id="radioNome" mnemonicParsing="false" text="Nome" />
       <RadioButton fx:id="radioCPF" mnemonicParsing="false" text="CPF/CNPJ" />
-      <TextField fx:id="campoPesquisa" promptText="Digite o nome ou CPF/CNPJ" prefWidth="400.0"/>
-      <Button fx:id="botaoPesquisar" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" text="Pesquisar" style="-fx-background-color: #F57C00; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" />
+      <TextField fx:id="campoPesquisa" prefWidth="300.0" promptText="Digite o nome ou CPF/CNPJ" />
+      <Button fx:id="botaoPesquisar" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: #F57C00; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Pesquisar" />
    </HBox>
 
    <!-- Table View for displaying results -->
@@ -52,25 +68,46 @@
    </TableView>
 
    <!-- Client Information Form -->
-   <VBox layoutX="50.0" layoutY="370.0" spacing="10.0">
-      <HBox spacing="10.0">
+   <VBox layoutX="50.0" layoutY="370.0" spacing="20.0">
+      <HBox spacing="15.0">
          <Label text="Nome:" />
-         <TextField fx:id="nomeField" />
       </HBox>
-      <HBox spacing="10.0">
+      <HBox spacing="15.0">
          <Label text="Endereço:" />
-         <TextField fx:id="enderecoField" />
       </HBox>
-      <HBox spacing="10.0">
+      <HBox spacing="15.0">
          <Label text="Telefone:" />
-         <TextField fx:id="telefoneField" />
       </HBox>
-      <HBox spacing="10.0">
+      <HBox spacing="15.0">
          <Label text="Email:" />
-         <TextField fx:id="emailField" />
       </HBox>
    </VBox>
 
-   <Button fx:id="botaoSalvar" layoutX="100.0" layoutY="530.0" mnemonicParsing="false" text="Salvar" style="-fx-background-color: #F57C00; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" />
+   <!-- Save Button -->
+   <Button fx:id="botaoSalvar" layoutX="64.0" layoutY="559.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="772.0" style="-fx-background-color: #F57C00; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Salvar" />
+
+   <!-- Separator -->
    <Separator layoutY="550.0" prefHeight="0.0" prefWidth="900.0" AnchorPane.rightAnchor="0.0" />
+   <AnchorPane layoutX="119.0" layoutY="345.0" prefHeight="190.0" prefWidth="310.0">
+      <children>
+         <TextField fx:id="nomeField" layoutX="40.0" layoutY="25.0" prefWidth="250.0" />
+         <TextField fx:id="enderecoField" layoutX="40.0" layoutY="59.0" prefWidth="250.0" />
+         <TextField fx:id="telefoneField" layoutX="40.0" layoutY="95.0" prefWidth="250.0" />
+         <TextField fx:id="emailField" layoutX="40.0" layoutY="129.0" prefWidth="250.0" />
+      </children>
+   </AnchorPane>
+   <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="464.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../images/settings.png" />
+      </image>
+   </ImageView>
+   <Label alignment="CENTER" layoutX="600.0" layoutY="370.0" prefHeight="27.0" prefWidth="250.0" text="Passo a passo">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label layoutX="600.0" layoutY="397.0" prefHeight="18.0" prefWidth="250.0" text="1 - Procure o cliente por nome OU cpf/ cnpj" />
+   <Label layoutX="600.0" layoutY="415.0" text="2 - Clique no cliente encontrado" />
+   <Label layoutX="600.0" layoutY="431.0" text="3 - Edite apenas as informações desejadas" />
+   <Label layoutX="600.0" layoutY="449.0" text="4 - Clique em &quot;Salvar&quot;" />
 </AnchorPane>
