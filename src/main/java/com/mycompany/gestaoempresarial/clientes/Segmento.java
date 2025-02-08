@@ -1,4 +1,4 @@
-package com.mycompany.gestaoempresarial.Usuarios;
+package com.mycompany.gestaoempresarial.clientes;
 
 public enum Segmento {
     VIP, inadimplente, Regular;

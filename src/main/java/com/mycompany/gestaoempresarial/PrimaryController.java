@@ -25,23 +25,6 @@ public class PrimaryController {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
-    @FXML
-    private void exibirClientes() throws IOException {
-        // Carregar o FXML da nova tela
-        Parent root = FXMLLoader.load(getClass().getResource("exibirClientesView.fxml"));
-        
-        // Criar uma nova janela (Stage)
-        Stage stage = new Stage();
-        stage.setTitle("Exibir Clientes");
-
-        // Configurar a janela com a função reutilizável da classe App
-        App.configurarJanela(stage, 1200, 600);
-
-        // Configurar a cena e mostrar a nova janela
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
   
     @FXML
     private void editarClientes() throws IOException {
@@ -61,7 +44,20 @@ public class PrimaryController {
     }
 
     @FXML
-    private void deletarClientes() throws IOException {
-        System.out.println("Clicou em deletar");
+    private void cadastrarProdutos() throws IOException {
+        // Carregar o FXML da nova tela
+        Parent root = FXMLLoader.load(getClass().getResource("cadastrarProdutosView.fxml"));
+
+        // Criar uma nova janela (Stage)
+        Stage stage = new Stage();
+        stage.setTitle("Editar Clientes");
+
+        // Configurar a janela com a função reutilizável da classe App
+        App.configurarJanela(stage, 900, 600);
+
+        // Configurar a cena e mostrar a nova janela
+        stage.setScene(new Scene(root));
+        stage.show();
     }
+    
 }

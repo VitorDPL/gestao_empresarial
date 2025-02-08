@@ -18,10 +18,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.EditarClientesController">
+<AnchorPane prefHeight="600.0" prefWidth="1266.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.EditarClientesController">
    
    <!-- Menu Bar -->
-   <MenuBar prefHeight="30.0" prefWidth="900.0">
+   <MenuBar prefHeight="30.0" prefWidth="1266.0">
      <menus>
        <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="File">
          <items>
@@ -64,6 +64,8 @@
          <TableColumn fx:id="colCPF" prefWidth="150" text="CPF/CNPJ" />
          <TableColumn fx:id="colTelefone" prefWidth="150" text="Telefone" />
          <TableColumn fx:id="colEmail" prefWidth="200" text="Email" />
+         <TableColumn fx:id="colEndereco" prefWidth="200" text="Endereço" />
+         <TableColumn fx:id="colSegmento" prefWidth="200" text="Segemento" />
      </columns>
    </TableView>
 
@@ -84,7 +86,7 @@
    </VBox>
 
    <!-- Save Button -->
-   <Button fx:id="botaoSalvar" layoutX="64.0" layoutY="559.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="772.0" style="-fx-background-color: #F57C00; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Salvar" />
+   <Button fx:id="botaoSalvar" layoutX="47.0" layoutY="559.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="367.0" style="-fx-background-color: #F57C00; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;" text="Salvar Informações" />
 
    <!-- Separator -->
    <Separator layoutY="550.0" prefHeight="0.0" prefWidth="900.0" AnchorPane.rightAnchor="0.0" />
@@ -110,4 +112,57 @@
    <Label layoutX="600.0" layoutY="415.0" text="2 - Clique no cliente encontrado" />
    <Label layoutX="600.0" layoutY="431.0" text="3 - Edite apenas as informações desejadas" />
    <Label layoutX="600.0" layoutY="449.0" text="4 - Clique em &quot;Salvar&quot;" />
+    <Button fx:id="botaoDeletar" layoutX="492.0" layoutY="559.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="367.0" style="-fx-background-color: red;" text="Deletar Cliente" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Button>
+   <Separator layoutX="900.0" layoutY="30.4" orientation="VERTICAL" prefHeight="570.0" prefWidth="14.0" style="-fx-background-color: none;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="30.0" />
+   <Pane layoutX="911.0" layoutY="30.0" prefHeight="50.0" prefWidth="354.0" style="-fx-background-color: #002D62;">
+      <children>
+         <Label alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="43.0" prefWidth="341.0" text="Adicionar Cliente" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </Label>
+      </children>
+   </Pane>
+<!-- Campos Esquerda -->
+<Label layoutX="914.0" layoutY="140.0" text="Nome Completo:" AnchorPane.leftAnchor="914.0">
+   <font>
+      <Font size="14.0" />
+   </font>
+</Label>
+<TextField fx:id="addCliNomeCompletoField" layoutX="915.0" layoutY="158.0" prefHeight="26.0" prefWidth="341.0" AnchorPane.leftAnchor="915.0" />
+
+<Label layoutX="914.0" layoutY="211.0" text="CPF/ CNPJ:" AnchorPane.leftAnchor="914.0">
+   <font>
+      <Font size="14.0" />
+   </font>
+</Label>
+<TextField fx:id="addCliCpfCnpjField" layoutX="915.0" layoutY="227.0" prefHeight="26.0" prefWidth="341.0" AnchorPane.leftAnchor="915.0" />
+
+<Label layoutX="914.0" layoutY="281.0" text="Endereço Completo:" AnchorPane.leftAnchor="914.0">
+   <font>
+      <Font size="14.0" />
+   </font>
+</Label>
+<TextField fx:id="addCliEnderecoField" layoutX="915.0" layoutY="299.0" prefHeight="26.0" prefWidth="341.0" AnchorPane.leftAnchor="915.0" />
+
+<Label layoutX="914.0" layoutY="345.0" text="Telefone:" AnchorPane.leftAnchor="914.0">
+   <font>
+      <Font size="14.0" />
+   </font>
+</Label>
+<TextField fx:id="addCliTelefoneField" layoutX="915.0" layoutY="363.0" prefHeight="26.0" prefWidth="341.0" AnchorPane.leftAnchor="915.0" />
+
+<Label layoutX="914.0" layoutY="414.0" text="Email:" AnchorPane.leftAnchor="914.0">
+   <font>
+      <Font size="14.0" />
+   </font>
+</Label>
+<TextField fx:id="addCliEmailField" layoutX="915.0" layoutY="435.0" prefHeight="26.0" prefWidth="341.0" AnchorPane.leftAnchor="915.0" />
+
+<Button fx:id="botaoCadastrarCliente" layoutX="915.0" layoutY="560.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="342.0" style="-fx-background-color: green;" text="Cadastrar Cliente" textFill="WHITE" />
+
 </AnchorPane>

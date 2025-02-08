@@ -41,11 +41,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button alignment="BASELINE_RIGHT" layoutX="14.0" layoutY="278.0" mnemonicParsing="false" onAction="#exibirClientes" prefHeight="156.0" prefWidth="223.0" text="Exibir Clientes">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Button alignment="BASELINE_RIGHT" layoutX="14.0" layoutY="460.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="156.0" prefWidth="223.0" text="Editar Clientes">
+      <Button alignment="BASELINE_RIGHT" layoutX="14.0" layoutY="460.0" mnemonicParsing="false" onAction="#editarClientes" prefHeight="156.0" prefWidth="223.0" text="Editar Clientses">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -54,24 +50,19 @@
             <Image url="@../../../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="101.0" fitWidth="106.0" layoutX="20.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/search.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="123.0" fitWidth="101.0" layoutX="21.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/update.png" />
          </image>
       </ImageView>
-      <Button alignment="BASELINE_RIGHT" layoutX="14.0" layoutY="641.0" mnemonicParsing="false" onAction="#deletarClientes" prefHeight="156.0" prefWidth="223.0" text="Deletar Clientes">
+      <Button alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="331.0" layoutY="98.0" mnemonicParsing="false" onAction="#cadastrarProdutos" prefHeight="156.0" prefWidth="223.0" text="Cadastrar Produto" textAlignment="RIGHT">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <ImageView fitHeight="101.0" fitWidth="101.0" layoutX="26.0" layoutY="676.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="87.0" fitWidth="101.0" layoutX="340.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/delete.png" />
+            <Image url="@../../../images/product.png" />
          </image>
       </ImageView>
    </children>

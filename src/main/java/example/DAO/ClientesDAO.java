@@ -1,7 +1,7 @@
 package example.DAO;
 
-import com.mycompany.gestaoempresarial.Usuarios.Cliente;
-import com.mycompany.gestaoempresarial.Usuarios.Segmento;
+import com.mycompany.gestaoempresarial.clientes.Cliente;
+import com.mycompany.gestaoempresarial.clientes.Segmento;
 import com.mysql.cj.protocol.Resultset;
 import example.banco.ConnectionFactory;
 
@@ -146,13 +146,26 @@ public class ClientesDAO implements DaoGenerics<Cliente, String> {
         return cliente;
     }
 
+    public Cliente deletar(Cliente obj, String cpf_cnpj) throws ClassNotFoundException, SQLException {
+        Connection c = ConnectionFactory.getConnection();
+
+        String sql = "DELETE FROM clientes WHERE cpf_cnpj = ?";
+
+        PreparedStatement stmt = c.prepareStatement(sql);
+        stmt.setString(1, cpf_cnpj);
+
+        stmt.executeUpdate();
+        stmt.close();
+        c.close();
+
+        return obj;
+    }
+
     public static void main(String[] args) {
-        //editar cliente cpf 1049185654
         try {
             ClientesDAO dao = new ClientesDAO();
-            Cliente cliente = dao.buscarPorCpfCnpj("1049185654");
-            cliente.setNome("Novo Nome");
-            dao.editar(cliente, "1049185654");
+            Cliente cliente = dao.buscarPorCpfCnpj("cxz");
+            dao.deletar(cliente, "cxz");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
