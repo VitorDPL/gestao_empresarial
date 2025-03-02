@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="900" maxWidth="1200" minHeight="530.0" minWidth="900" prefHeight="556.0" prefWidth="1040.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.Produtos.GerenciarProdutosController">
+   <children>
+      <!-- Menu -->
+      <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="Edit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" style="-fx-text-fill: #FFFFFF;" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+
+      <!-- Título -->
+      <Label alignment="CENTER" layoutX="711.2" layoutY="26.0" prefHeight="46.0" prefWidth="327.0" style="-fx-background-color: #002D62;" text="Cadastrar Produto" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="711.0" AnchorPane.rightAnchor="2.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+
+      <!-- Campos Esquerda -->
+      <Label layoutX="714.0" layoutY="92.0" text="Nome:" AnchorPane.leftAnchor="714.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nomeField" layoutX="712.8" layoutY="114.0" prefHeight="26.0" prefWidth="309.0" AnchorPane.leftAnchor="713.0" />
+
+      <Label layoutX="711.0" layoutY="211.0" text="Código:" AnchorPane.leftAnchor="711.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="codigoField" layoutX="712.0" layoutY="231.0" prefHeight="26.0" prefWidth="310.0" AnchorPane.leftAnchor="712.0" />
+
+      <Label layoutX="712.0" layoutY="328.0" text="Descrição:" AnchorPane.leftAnchor="712.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="descricaoField" layoutX="712.0" layoutY="348.0" prefHeight="26.0" prefWidth="310.0" AnchorPane.leftAnchor="712.0" />
+
+      <!-- Campos Direita -->
+      <Label layoutX="713.0" layoutY="152.0" prefHeight="20.0" prefWidth="110.0" text="Preço de Compra:" AnchorPane.rightAnchor="216.60000000000002">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="precoCompraField" layoutX="618.0" layoutY="172.0" prefHeight="26.0" prefWidth="310.0" AnchorPane.rightAnchor="18.0" />
+
+      <Label layoutX="709.0" layoutY="268.0" text="Preço de Venda:" AnchorPane.rightAnchor="230.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="precoVendaField" layoutX="618.0" layoutY="288.0" prefHeight="26.0" prefWidth="310.0" AnchorPane.rightAnchor="18.0" />
+
+      <Label layoutX="712.0" layoutY="380.0" text="Categoria:" AnchorPane.rightAnchor="264.79999999999995">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+
+      <ComboBox fx:id="categoriaComboBox" layoutX="713.0" layoutY="400.0" prefHeight="26.0" prefWidth="261.0" />
+
+      <!-- Novo campo de Quantidade -->
+      <Label layoutX="712.0" layoutY="438.0" text="Quantidade:" AnchorPane.rightAnchor="252.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="quantidadeField" layoutX="711.0" layoutY="458.0" prefHeight="26.0" prefWidth="310.0" AnchorPane.rightAnchor="18.600000000000023" />
+      <Button fx:id="botaoCadastrarProduto" layoutX="711.0" layoutY="515.0" mnemonicParsing="false" onAction="#cadastrarProduto" prefHeight="26.0" prefWidth="310.0" style="-fx-background-color: green;" text="Cadastrar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="993.0" layoutY="400.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" text="+" />
+      <TableView fx:id="tabelaProdutos" layoutX="14.0" layoutY="92.0" prefHeight="390.0" prefWidth="682.0">
+         <columns>
+            <TableColumn fx:id="colunaId" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="colunaNome" prefWidth="75.0" text="Nome" />
+            <TableColumn fx:id="colunaCodigo" prefWidth="75.0" text="Código" />
+            <TableColumn fx:id="colunaPrecoCompra" prefWidth="75.0" text="Preço de Compra" />
+            <TableColumn fx:id="colunaPrecoVenda" prefWidth="75.0" text="Preço de Venda" />
+            <TableColumn fx:id="colunaLucro" prefWidth="75.0" text="Lucro" />
+         </columns>
+      </TableView>
+      <Button fx:id="botaoSalvar" layoutX="14.0" layoutY="516.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="235.0" text="Editar Infomações" />
+      <Button fx:id="botaoDeletar" layoutX="389.0" layoutY="516.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="235.0" text="Deletar Produto" />
+      <RadioButton fx:id="radioNome" layoutX="132.0" layoutY="49.0" mnemonicParsing="false" text="Nome Produto" />
+      <RadioButton fx:id="radioCod" layoutX="12.0" layoutY="49.0" mnemonicParsing="false" text="Código Produto" />
+      <TextField fx:id="campoPesquisa" layoutX="253.0" layoutY="45.0" prefHeight="26.0" prefWidth="182.0" />
+      <Button fx:id="botaoPesquisar" layoutX="451.0" layoutY="45.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="101.0" text="Pesquisar" />
+
+   </children>
+</AnchorPane>

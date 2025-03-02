@@ -1,5 +1,7 @@
 package com.mycompany.gestaoempresarial.clientes;
 
+import java.util.Date;
+
 public class Cliente {
 
     private int id;
@@ -9,8 +11,10 @@ public class Cliente {
     private String telefone;
     private String email;
     private Segmento segmento;
+    private Date data_cadastro;
 
-    public Cliente(int id, String nome, String cpf_cnpj, String endereco, String telefone, String email, Segmento segmento) {
+    // Construtor completo
+    public Cliente(int id, String nome, String cpf_cnpj, String endereco, String telefone, String email, Segmento segmento, Date data_cadastro) {
         this.id = id;
         this.nome = nome;
         this.cpf_cnpj = cpf_cnpj;
@@ -18,8 +22,10 @@ public class Cliente {
         this.telefone = telefone;
         this.email = email;
         this.segmento = segmento;
+        this.data_cadastro = data_cadastro;
     }
 
+    // Construtor sem ID e data_cadastro (data será setada como a atual)
     public Cliente(String nome, String cpf_cnpj, String endereco, String telefone, String email, Segmento segmento) {
         this.nome = nome;
         this.cpf_cnpj = cpf_cnpj;
@@ -27,12 +33,15 @@ public class Cliente {
         this.telefone = telefone;
         this.email = email;
         this.segmento = segmento;
+        this.data_cadastro = new Date(); // Define a data atual
     }
 
+    // Construtor vazio
     public Cliente() {
-
+        this.data_cadastro = new Date(); // Define a data atual
     }
 
+    // Getters e Setters
     public int getId() {
         return id;
     }
@@ -87,5 +96,13 @@ public class Cliente {
 
     public void setSegmento(Segmento segmento) {
         this.segmento = segmento;
+    }
+
+    public Date getDataCadastro() {
+        return this.data_cadastro;
+    }
+
+    public void setDataCadastro(Date data_cadastro) {
+        this.data_cadastro = data_cadastro;
     }
 }

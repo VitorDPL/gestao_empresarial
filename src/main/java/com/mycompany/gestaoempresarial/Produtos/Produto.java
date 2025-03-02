@@ -1,5 +1,7 @@
 package com.mycompany.gestaoempresarial.Produtos;
 
+import java.util.Date;
+
 public class Produto {
     private int id;
     private String nome;
@@ -12,7 +14,7 @@ public class Produto {
     private double custo;
     private int estoque_atual;
 
-    public Produto(int id, String nome, String codigo, String descricao, int categoria_id, int preco_compra, double preco_venda, double lucro_produto, double custo, int estoque_atual) {
+    public Produto(int id, String nome, String codigo, String descricao, int categoria_id, int preco_compra, double preco_venda, double lucro_produto, double custo, int estoque_atual, Date date) {
         this.id = id;
         this.nome = nome;
         this.codigo = codigo;

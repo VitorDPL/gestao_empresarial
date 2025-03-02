@@ -11,6 +11,8 @@ public class ConnectionFactory {
         String user = System.getenv("USER");
         String password = System.getenv("PASSWORD");
 
+
+
         return DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/gestao_empresarial", user, password);
     }

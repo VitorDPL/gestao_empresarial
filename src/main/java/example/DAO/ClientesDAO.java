@@ -18,7 +18,7 @@ public class ClientesDAO implements DaoGenerics<Cliente, String> {
         Connection c = ConnectionFactory.getConnection();
 
         // Usando PreparedStatement para evitar SQL Injection
-        String sql = "INSERT INTO Clientes (nome, cpf_cnpj, endereco, telefone, email, segmento) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Clientes (nome, cpf_cnpj, endereco, telefone, email, segmento, data_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = c.prepareStatement(sql);
         stmt.setString(1, obj.getNome());
         stmt.setString(2, obj.getCpf_cnpj());
@@ -26,6 +26,8 @@ public class ClientesDAO implements DaoGenerics<Cliente, String> {
         stmt.setString(4, obj.getTelefone());
         stmt.setString(5, obj.getEmail());
         stmt.setString(6, obj.getSegmento().toString());
+        stmt.setDate(7, new java.sql.Date(obj.getDataCadastro().getTime()));
+
 
         stmt.executeUpdate();
         stmt.close();

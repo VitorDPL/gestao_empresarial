@@ -10,26 +10,9 @@ import javafx.stage.Stage;
 public class PrimaryController {
 
     @FXML
-    private void cadastrarCliente() throws IOException {
-        // Carregar o FXML da nova tela
-        Parent root = FXMLLoader.load(getClass().getResource("cadastrarClientesView.fxml"));
-        
-        // Criar uma nova janela (Stage)
-        Stage stage = new Stage();
-        stage.setTitle("Cadastrar Cliente");
-
-        // Configurar a janela com a função reutilizável da classe App
-        App.configurarJanela(stage, 900, 600);
-
-        // Configurar a cena e mostrar a nova janela
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-  
-    @FXML
     private void editarClientes() throws IOException {
         // Carregar o FXML da nova tela
-        Parent root = FXMLLoader.load(getClass().getResource("editarClientesView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gerenciarClientesView.fxml"));
 
         // Criar uma nova janela (Stage)
         Stage stage = new Stage();
@@ -46,7 +29,7 @@ public class PrimaryController {
     @FXML
     private void cadastrarProdutos() throws IOException {
         // Carregar o FXML da nova tela
-        Parent root = FXMLLoader.load(getClass().getResource("cadastrarProdutosView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gerenciarProdutosView.fxml"));
 
         // Criar uma nova janela (Stage)
         Stage stage = new Stage();
@@ -59,5 +42,4 @@ public class PrimaryController {
         stage.setScene(new Scene(root));
         stage.show();
     }
-    
 }
