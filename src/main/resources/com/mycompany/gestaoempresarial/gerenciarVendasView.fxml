@@ -76,30 +76,44 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="labelTotalLiquido" layoutX="793.0" layoutY="337.0" style="-fx-background-color: green;" text="Total Líquido: 0.00" textFill="WHITE">
+      <Label fx:id="labelTotalLiquido" layoutX="646.0" layoutY="337.0" style="-fx-background-color: green;" text="Total Líquido: 0.00" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label fx:id="labelTotalBruto" layoutX="927.0" layoutY="337.0" style="-fx-background-color: green;" text="Total Bruto: 0.00" textFill="WHITE">
+      <Label fx:id="labelTotalBruto" layoutX="793.0" layoutY="337.0" style="-fx-background-color: green;" text="Total Bruto: 0.00" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
       <RadioButton fx:id="radioCodigoProduto" layoutX="541.0" layoutY="83.0" mnemonicParsing="false" text="Código" />
       <RadioButton fx:id="radioNomeProduto" layoutX="643.0" layoutY="82.0" mnemonicParsing="false" text="Nome" />
-      <Button fx:id="botaoEncontrarProdutos" layoutX="793.0" layoutY="363.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="238.0" text="Encontrar Produtos" />
+      <Button fx:id="botaoEncontrarProdutos" layoutX="793.0" layoutY="363.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="238.0" style="-fx-background-color: #F57C00;" text="Encontrar Produtos" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <Separator layoutX="526.0" layoutY="400.0" prefHeight="0.0" prefWidth="502.0" />
       <Label alignment="CENTER" layoutX="520.0" layoutY="403.0" prefHeight="33.0" prefWidth="510.0" style="-fx-background-color: #002D62;" text="Adicionar Venda Ao Cliente" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <RadioButton layoutX="520.0" layoutY="450.0" mnemonicParsing="false" text="CPF Cliente" />
-      <TextField fx:id="campoCpfCliente" layoutX="622.0" layoutY="446.0" />
-      <Button fx:id="botaoAdicionarVenda" layoutX="787.0" layoutY="445.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="238.0" text="Adicionar" />
-      <Button fx:id="botaoEncontrarClientes" layoutX="522.0" layoutY="478.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="502.0" text="Encontrar Cliente Pelo Nome" />
+      <TextField fx:id="campoCpfCliente" layoutX="622.0" layoutY="470.0" />
+      <Button fx:id="botaoAdicionarVenda" layoutX="787.0" layoutY="469.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="238.0" style="-fx-background-color: green;" text="Adicionar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="botaoEncontrarClientes" layoutX="520.0" layoutY="520.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="502.0" style="-fx-background-color: #F57C00;" text="Encontrar Cliente Pelo Nome" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       
     <Label layoutX="14.0" layoutY="483.0" text="Total Líquido ( Vendas JÁ REALIZADAS )" />
-      <Label layoutX="14.0" layoutY="511.0" text="Total Bruto ( Vendas JÁ REALIZADAS )" />
+      <Label layoutX="300.0" layoutY="483.0" text="Total Bruto ( Vendas JÁ REALIZADAS )" />
+      <Button layoutX="14.0" layoutY="520.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="488.0" style="-fx-background-color: red;" text="Deletar Venda Selecionada" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="527.0" layoutY="474.0" prefHeight="18.0" prefWidth="84.0" text="CPF Cliente:" />
       
    </children>
 </AnchorPane>

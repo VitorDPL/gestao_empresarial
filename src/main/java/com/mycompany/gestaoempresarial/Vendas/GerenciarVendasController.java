@@ -2,6 +2,7 @@ package com.mycompany.gestaoempresarial.Vendas;
 
 import com.mycompany.gestaoempresarial.Produtos.Produto;
 import com.mycompany.gestaoempresarial.clientes.Cliente;
+import example.DAO.ItemVendaDAO;
 import example.DAO.VendasDAO;
 import example.DAO.ProdutosDAO;
 import example.DAO.ClientesDAO;
@@ -230,7 +231,6 @@ public class GerenciarVendasController implements Initializable {
         labelTotalLiquido.setText(String.format("Total Líquido: %.2f", totalLiquido));
         labelTotalBruto.setText(String.format("Total Bruto: %.2f", totalBruto));
     }
-
     private void adicionarVenda() {
         String cpfCliente = campoCpfCliente.getText().trim();
         if (cpfCliente.isEmpty()) {
@@ -250,6 +250,17 @@ public class GerenciarVendasController implements Initializable {
             VendasDAO vendasDAO = new VendasDAO();
             Venda novaVenda = new Venda(0, new java.util.Date(), clienteId, FormaPagamento.CartãoCrédito, calcularTotalVenda());
             vendasDAO.inserir(novaVenda);
+
+            // Obter o ID da venda recém-inserida
+            int vendaId = vendasDAO.buscarUltimaVendaId();
+
+            // Inserir itens da venda
+            ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+            for (Produto produto : listaProdutos) {
+                ItemVenda itemVenda = new ItemVenda(0, vendaId, produto.getId());
+                itemVendaDAO.inserir(itemVenda);
+            }
+
             mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Venda adicionada com sucesso.");
             listaProdutos.clear();
             atualizarTotais();

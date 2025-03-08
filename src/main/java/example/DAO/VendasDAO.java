@@ -195,6 +195,25 @@ public class VendasDAO implements DaoGenerics<Venda, String> {
         return vendas;
     }
 
+    public int buscarUltimaVendaId() throws ClassNotFoundException, SQLException {
+        Connection c = ConnectionFactory.getConnection();
+
+        String sql = "SELECT MAX(id) AS id FROM vendas";
+        PreparedStatement pst = c.prepareStatement(sql);
+
+        ResultSet rs = pst.executeQuery();
+        int vendaId = 0;
+        if (rs.next()) {
+            vendaId = rs.getInt("id");
+        }
+
+        rs.close();
+        pst.close();
+        c.close();
+
+        return vendaId;
+    }
+
     public static void main(String[] args) {
         try {
             VendasDAO dao = new VendasDAO();
