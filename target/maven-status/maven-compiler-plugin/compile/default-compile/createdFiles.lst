@@ -3,13 +3,17 @@ com\mycompany\gestaoempresarial\clientes\Cliente.class
 com\mycompany\gestaoempresarial\Produtos\Categoria.class
 example\banco\ConnectionFactory.class
 module-info.class
+com\mycompany\gestaoempresarial\Vendas\GerenciarVendasController.class
 example\DAO\ClientesDAO.class
 com\mycompany\gestaoempresarial\Produtos\GerenciarProdutosController.class
 com\mycompany\gestaoempresarial\SecondaryController.class
+com\mycompany\gestaoempresarial\Vendas\FormaPagamento.class
 example\DAO\ProdutosDAO.class
 com\mycompany\gestaoempresarial\clientes\Segmento.class
+example\DAO\VendasDAO.class
 example\DAO\DaoGenerics.class
 example\DAO\CategoriasDAO.class
 com\mycompany\gestaoempresarial\PrimaryController.class
+com\mycompany\gestaoempresarial\Vendas\Venda.class
 com\mycompany\gestaoempresarial\Produtos\Produto.class
 com\mycompany\gestaoempresarial\EditarClientesController.class

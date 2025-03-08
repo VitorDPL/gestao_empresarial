@@ -8,8 +8,8 @@ public class ConnectionFactory {
 
     public static Connection getConnection() throws SQLException {
 
-        String user = System.getenv("USER");
-        String password = System.getenv("PASSWORD");
+        String user = System.getenv("DB_USER");
+        String password = System.getenv("DB_PASSWORD");
 
 
 

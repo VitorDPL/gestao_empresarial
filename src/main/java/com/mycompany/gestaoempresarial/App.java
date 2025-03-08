@@ -44,9 +44,10 @@ public class App extends Application {
     }
 
     // Função para configurar as propriedades da janela (Stage)
-    public static void configurarJanela(Stage stage, int minWidth, int minHeight) {
-        stage.setMinWidth(minWidth);
-        stage.setMinHeight(minHeight);
+    public static void configurarJanela(Stage stage, int minMaxWidth, int minMaxHeight) {
+        stage.setMinWidth(minMaxWidth);
+        stage.setMinHeight(minMaxHeight);
+
     }
 
     public static void main(String[] args) {
