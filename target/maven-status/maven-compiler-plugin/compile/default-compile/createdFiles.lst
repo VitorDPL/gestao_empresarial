@@ -9,6 +9,7 @@ example\DAO\ClientesDAO.class
 com\mycompany\gestaoempresarial\Produtos\GerenciarProdutosController.class
 com\mycompany\gestaoempresarial\SecondaryController.class
 com\mycompany\gestaoempresarial\Vendas\FormaPagamento.class
+com\mycompany\gestaoempresarial\clientes\VendasClientesController.class
 example\DAO\ProdutosDAO.class
 com\mycompany\gestaoempresarial\clientes\Segmento.class
 example\DAO\VendasDAO.class

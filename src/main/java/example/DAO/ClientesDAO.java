@@ -1,9 +1,13 @@
 package example.DAO;
 
+import com.mycompany.gestaoempresarial.Vendas.FormaPagamento;
+import com.mycompany.gestaoempresarial.Vendas.Venda;
 import com.mycompany.gestaoempresarial.clientes.Cliente;
 import com.mycompany.gestaoempresarial.clientes.Segmento;
 import com.mysql.cj.protocol.Resultset;
 import example.banco.ConnectionFactory;
+import com.mycompany.gestaoempresarial.Produtos.Produto;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,34 +40,38 @@ public class ClientesDAO implements DaoGenerics<Cliente, String> {
     }
 
     @Override
-    public ArrayList<Cliente> buscarTodos() throws ClassNotFoundException, SQLException {
+    public ArrayList<Cliente> buscarTodos() throws SQLException {
         Connection c = ConnectionFactory.getConnection();
-
-        String sql = "Select * from clientes";
-
+        String sql = "SELECT * FROM clientes";
         PreparedStatement pst = c.prepareStatement(sql);
-
-        Resultset rs = (Resultset) pst.executeQuery();
+        ResultSet rs = pst.executeQuery();
 
         ArrayList<Cliente> clientes = new ArrayList<>();
-
-        while (((java.sql.ResultSet) rs).next()) {
-            Cliente cliente = new Cliente(((java.sql.ResultSet) rs).getString("nome"), ((java.sql.ResultSet) rs).getString("cpf_cnpj"), ((java.sql.ResultSet) rs).getString("endereco"), ((java.sql.ResultSet) rs).getString("telefone"), ((java.sql.ResultSet) rs).getString("email"), Segmento.valueOf(((java.sql.ResultSet) rs).getString("segmento")));
+        while (rs.next()) {
+            Cliente cliente = new Cliente(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getString("cpf_cnpj"),
+                    rs.getString("endereco"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    Segmento.valueOf(rs.getString("segmento")),
+                    rs.getDate("data_cadastro")
+            );
             clientes.add(cliente);
         }
-
+        rs.close();
+        pst.close();
+        c.close();
         return clientes;
-
     }
 
     public Cliente editar(Cliente obj, String cpf_cnpj) throws ClassNotFoundException, SQLException {
         Connection c = ConnectionFactory.getConnection();
 
-        // Criando a consulta de atualização inicial
         StringBuilder sql = new StringBuilder("UPDATE clientes SET ");
         List<Object> parametros = new ArrayList<>();
 
-        // Verifica e adiciona cada campo à consulta apenas se não estiver em branco
         if (obj.getNome() != null && !obj.getNome().isEmpty()) {
             sql.append("nome = ?, ");
             parametros.add(obj.getNome());
@@ -85,24 +93,18 @@ public class ClientesDAO implements DaoGenerics<Cliente, String> {
             parametros.add(obj.getSegmento().toString());
         }
 
-        // Remover a última vírgula e espaço da consulta
         sql.setLength(sql.length() - 2);
 
-        // Adiciona a condição WHERE para o CPF/CNPJ
         sql.append(" WHERE cpf_cnpj = ?");
 
-        // Adiciona o CPF/CNPJ como o último parâmetro
         parametros.add(cpf_cnpj);
 
-        // Preparando a consulta
         PreparedStatement stmt = c.prepareStatement(sql.toString());
 
-        // Definindo os parâmetros na consulta
         for (int i = 0; i < parametros.size(); i++) {
             stmt.setObject(i + 1, parametros.get(i));
         }
 
-        // Executa a atualização
         stmt.executeUpdate();
         stmt.close();
         c.close();
@@ -111,19 +113,17 @@ public class ClientesDAO implements DaoGenerics<Cliente, String> {
     }
 
 
-    public Cliente buscarPorCpfCnpj(String cpf_cnpj) throws ClassNotFoundException, SQLException {
+    public Cliente buscarPorNome(String nome) throws SQLException {
         Connection c = ConnectionFactory.getConnection();
-
-        String sql = "SELECT * FROM clientes WHERE cpf_cnpj = ?";
+        String sql = "SELECT * FROM clientes WHERE nome = ?";
         PreparedStatement pst = c.prepareStatement(sql);
-        pst.setString(1, cpf_cnpj);
-
+        pst.setString(1, nome);
         ResultSet rs = pst.executeQuery();
-        Cliente cliente = null;
 
+        Cliente cliente = null;
         if (rs.next()) {
             cliente = new Cliente(
-                    rs.getInt("id"),
+                    rs.getInt("id"), // Ensure the ID is set
                     rs.getString("nome"),
                     rs.getString("cpf_cnpj"),
                     rs.getString("endereco"),
@@ -133,30 +133,35 @@ public class ClientesDAO implements DaoGenerics<Cliente, String> {
                     rs.getDate("data_cadastro")
             );
         }
-
         rs.close();
         pst.close();
         c.close();
-
         return cliente;
     }
 
-    public Cliente buscarPorNome(String nome) throws ClassNotFoundException, SQLException {
+    public Cliente buscarPorCpfCnpj(String cpfCnpj) throws SQLException {
         Connection c = ConnectionFactory.getConnection();
-
-        String sql = "Select * from clientes where nome = ?";
-
+        String sql = "SELECT * FROM clientes WHERE cpf_cnpj = ?";
         PreparedStatement pst = c.prepareStatement(sql);
-        pst.setString(1, nome);
-
-        Resultset rs = (Resultset) pst.executeQuery();
+        pst.setString(1, cpfCnpj);
+        ResultSet rs = pst.executeQuery();
 
         Cliente cliente = null;
-
-        if (((java.sql.ResultSet) rs).next()) {
-            cliente = new Cliente(((java.sql.ResultSet) rs).getString("nome"), ((java.sql.ResultSet) rs).getString("cpf_cnpj"), ((java.sql.ResultSet) rs).getString("endereco"), ((java.sql.ResultSet) rs).getString("telefone"), ((java.sql.ResultSet) rs).getString("email"), Segmento.valueOf(((java.sql.ResultSet) rs).getString("segmento")));
+        if (rs.next()) {
+            cliente = new Cliente(
+                    rs.getInt("id"), // Ensure the ID is set
+                    rs.getString("nome"),
+                    rs.getString("cpf_cnpj"),
+                    rs.getString("endereco"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    Segmento.valueOf(rs.getString("segmento")),
+                    rs.getDate("data_cadastro")
+            );
         }
-
+        rs.close();
+        pst.close();
+        c.close();
         return cliente;
     }
 
@@ -174,6 +179,35 @@ public class ClientesDAO implements DaoGenerics<Cliente, String> {
 
         return obj;
     }
+
+    public List<Venda> buscarPorVendasCliente(int clienteId) {
+        List<Venda> vendas = new ArrayList<>();
+        String sql = "SELECT * FROM vendas WHERE clienteId = ?";
+
+        System.out.println("Buscando vendas do cliente: " + clienteId);
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, clienteId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Venda venda = new Venda(
+                            rs.getInt("id"),
+                            rs.getDate("data"),
+                            rs.getInt("clienteId"),
+                            FormaPagamento.valueOf(rs.getString("formaPagamento")),
+                            rs.getDouble("total")
+                    );
+                    vendas.add(venda);
+                    System.out.println("Vendas encontradas: " + vendas.size());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return vendas;
+    }
+
 
     public static void main(String[] args) {
         try {
