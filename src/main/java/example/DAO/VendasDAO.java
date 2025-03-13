@@ -1,6 +1,8 @@
 package example.DAO;
 
+import com.mycompany.gestaoempresarial.Produtos.Produto;
 import com.mycompany.gestaoempresarial.Vendas.FormaPagamento;
+import com.mycompany.gestaoempresarial.Vendas.ItemVenda;
 import com.mycompany.gestaoempresarial.Vendas.Venda;
 import example.banco.ConnectionFactory;
 
@@ -210,6 +212,49 @@ public class VendasDAO implements DaoGenerics<Venda, String> {
         c.close();
 
         return vendaId;
+    }
+
+    public List<ItemVenda> buscarItensPorVendaId(int vendaId) throws SQLException {
+        List<ItemVenda> itensVenda = new ArrayList<>();
+        String sql = "SELECT iv.id, iv.venda_id, iv.produto_id " +
+                "FROM itens_venda iv " +
+                "WHERE iv.venda_id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, vendaId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int produtoId = rs.getInt("produto_id");
+
+                ItemVenda itemVenda = new ItemVenda(id, vendaId, produtoId);
+                itensVenda.add(itemVenda);
+            }
+        }
+        return itensVenda;
+    }
+
+    public Produto buscarProdutoPorId(int produtoId) throws SQLException {
+        String sql = "SELECT id, nome, preco_compra, preco_venda " +
+                "FROM produtos WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, produtoId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                double precoCompra = rs.getDouble("preco_compra");
+                double precoVenda = rs.getDouble("preco_venda");
+
+                return new Produto(id, nome, (int)precoCompra, precoVenda);
+            }
+        }
+        return null;
     }
 
     public static void main(String[] args) {

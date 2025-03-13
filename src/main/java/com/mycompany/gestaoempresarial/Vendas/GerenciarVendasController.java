@@ -211,6 +211,8 @@ public class GerenciarVendasController implements Initializable {
                 mostrarAlerta(Alert.AlertType.INFORMATION, "Venda não encontrada", "Nenhuma venda encontrada.");
             }
 
+            atualizarTotaisVendasRealizadas();
+
         } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao buscar venda.");
@@ -303,6 +305,7 @@ public class GerenciarVendasController implements Initializable {
             listaProdutos.clear();
             atualizarTotais();
             carregarTodasVendas();
+            atualizarTotaisVendasRealizadas();
         } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao adicionar venda.");
@@ -380,8 +383,21 @@ public class GerenciarVendasController implements Initializable {
             VendasDAO vendasDAO = new VendasDAO();
             List<Venda> vendasRealizadas = vendasDAO.buscarTodos();
 
-            double totalLiquidoRealizadas = vendasRealizadas.stream().mapToDouble(Venda::getTotal).sum();
-            double totalBrutoRealizadas = vendasRealizadas.stream().mapToDouble(Venda::getTotal).sum();
+            double totalBrutoRealizadas = 0.0;
+            double totalLiquidoRealizadas = 0.0;
+
+            for (Venda venda : vendasRealizadas) {
+                List<ItemVenda> itensVenda = vendasDAO.buscarItensPorVendaId(venda.getId());
+                for (ItemVenda item : itensVenda) {
+                    Produto produto = vendasDAO.buscarProdutoPorId(item.getProdutoId());
+                    double precoVenda = produto.getPreco_venda();
+                    double precoCompra = produto.getPreco_compra();
+                    double lucroProduto = precoVenda - precoCompra;
+
+                    totalBrutoRealizadas += precoVenda;
+                    totalLiquidoRealizadas += lucroProduto;
+                }
+            }
 
             labelTotalLiquidoRealizadas.setText(String.format("Total Líquido (Vendas JÁ REALIZADAS): %.2f", totalLiquidoRealizadas));
             labelTotalBrutoRealizadas.setText(String.format("Total Bruto (Vendas JÁ REALIZADAS): %.2f", totalBrutoRealizadas));

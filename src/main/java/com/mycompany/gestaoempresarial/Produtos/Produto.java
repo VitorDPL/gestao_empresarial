@@ -27,6 +27,13 @@ public class Produto {
         this.estoque_atual = estoque_atual;
     }
 
+    public Produto(int id, String nome, int preco_compra, double preco_venda) {
+        this.id = id;
+        this.nome = nome;
+        this.preco_compra = preco_compra;
+        this.preco_venda = preco_venda;
+    }
+
     public int getId() {
         return id;
     }
