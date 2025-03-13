@@ -105,10 +105,18 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      
-    <Label layoutX="14.0" layoutY="483.0" text="Total Líquido ( Vendas JÁ REALIZADAS )" />
-      <Label layoutX="300.0" layoutY="483.0" text="Total Bruto ( Vendas JÁ REALIZADAS )" />
-      <Button layoutX="14.0" layoutY="520.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="488.0" style="-fx-background-color: red;" text="Deletar Venda Selecionada" textFill="WHITE">
+
+      <Label fx:id="labelTotalLiquidoRealizadas" layoutX="14.0" layoutY="500.0" style="-fx-background-color: green;" text="Total Líquido (Vendas JÁ REALIZADAS): 0.00" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelTotalBrutoRealizadas" layoutX="300.0" layoutY="500.0" style="-fx-background-color: green;" text="Total Bruto (Vendas JÁ REALIZADAS): 0.00" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="deletarVendaSelecionada" layoutX="14.0" layoutY="520.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="488.0" style="-fx-background-color: red;" text="Deletar Venda Selecionada" textFill="WHITE" onAction="#deletarVendaSelecionada">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

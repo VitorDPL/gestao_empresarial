@@ -7,6 +7,7 @@ import example.DAO.VendasDAO;
 import example.DAO.ProdutosDAO;
 import example.DAO.ClientesDAO;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,6 +101,15 @@ public class GerenciarVendasController implements Initializable {
     @FXML
     private Button botaoEncontrarProdutos;
 
+    @FXML
+    private Button deletarVendaSelecionada;
+
+    @FXML
+    private Label labelTotalLiquidoRealizadas;
+
+    @FXML
+    private Label labelTotalBrutoRealizadas;
+
     private ObservableList<Venda> listaVendas = FXCollections.observableArrayList();
     private ObservableList<Produto> listaProdutos = FXCollections.observableArrayList();
 
@@ -117,7 +127,7 @@ public class GerenciarVendasController implements Initializable {
         radioCodigoProduto.setSelected(true);
 
         colunaIdVenda.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colunaNomeCliente.setCellValueFactory(new PropertyValueFactory<>("clienteId"));
+        colunaNomeCliente.setCellValueFactory(new PropertyValueFactory<>("clienteNome"));
         colunaDataVenda.setCellValueFactory(new PropertyValueFactory<>("data"));
         colunaTotalVenda.setCellValueFactory(new PropertyValueFactory<>("total"));
 
@@ -154,6 +164,26 @@ public class GerenciarVendasController implements Initializable {
 
         carregarTodasVendas();
         atualizarTotais();
+        atualizarTotaisVendasRealizadas();
+    }
+
+    @FXML
+    private void deletarVendaSelecionada() {
+        Venda vendaSelecionada = tabelaVendas.getSelectionModel().getSelectedItem();
+        if (vendaSelecionada == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Atenção", "Selecione uma venda para deletar.");
+            return;
+        }
+
+        try {
+            VendasDAO vendasDAO = new VendasDAO();
+            vendasDAO.deletar(vendaSelecionada, String.valueOf(vendaSelecionada.getId()));
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Venda deletada com sucesso.");
+            carregarTodasVendas();
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao deletar venda.");
+        }
     }
 
     private void pesquisarVenda() {
@@ -282,7 +312,7 @@ public class GerenciarVendasController implements Initializable {
     private double calcularTotalVenda() {
         double total = 0.0;
         for (Produto produto : listaProdutos) {
-            total += produto.getPreco_compra();
+            total += produto.getPreco_venda();
         }
         return total;
     }
@@ -343,5 +373,21 @@ public class GerenciarVendasController implements Initializable {
         alerta.setHeaderText(null);
         alerta.setContentText(mensagem);
         alerta.showAndWait();
+    }
+
+    private void atualizarTotaisVendasRealizadas() {
+        try {
+            VendasDAO vendasDAO = new VendasDAO();
+            List<Venda> vendasRealizadas = vendasDAO.buscarTodos();
+
+            double totalLiquidoRealizadas = vendasRealizadas.stream().mapToDouble(Venda::getTotal).sum();
+            double totalBrutoRealizadas = vendasRealizadas.stream().mapToDouble(Venda::getTotal).sum();
+
+            labelTotalLiquidoRealizadas.setText(String.format("Total Líquido (Vendas JÁ REALIZADAS): %.2f", totalLiquidoRealizadas));
+            labelTotalBrutoRealizadas.setText(String.format("Total Bruto (Vendas JÁ REALIZADAS): %.2f", totalBrutoRealizadas));
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao calcular os totais das vendas já realizadas.");
+        }
     }
 }

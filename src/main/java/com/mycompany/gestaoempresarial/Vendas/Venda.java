@@ -8,12 +8,20 @@ public class Venda {
     private int clienteId;
     private FormaPagamento formaPagamento;
     private double total;
+    private String clienteNome;
 
     public Venda(int id, Date data, int clienteId, FormaPagamento formaPagamento, double total) {
         this.id = id;
         this.data = data;
         this.clienteId = clienteId;
         this.formaPagamento = formaPagamento;
+        this.total = total;
+    }
+
+    public Venda(int id, String clienteNome, Date data, double total){
+        this.id = id;
+        this.clienteNome = clienteNome;
+        this.data = data;
         this.total = total;
     }
 
@@ -56,5 +64,13 @@ public class Venda {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String getClienteNome() {
+        return clienteNome;
+    }
+
+    public void setClienteNome(String clienteNome) {
+        this.clienteNome = clienteNome;
     }
 }

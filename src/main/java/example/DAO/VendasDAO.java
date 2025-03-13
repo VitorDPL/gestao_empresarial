@@ -30,28 +30,26 @@ public class VendasDAO implements DaoGenerics<Venda, String> {
     }
 
     @Override
-    public ArrayList<Venda> buscarTodos() throws ClassNotFoundException, SQLException {
-        Connection c = ConnectionFactory.getConnection();
-
-        String sql = "SELECT * FROM vendas";
-
-        PreparedStatement pst = c.prepareStatement(sql);
-
-        ResultSet rs = pst.executeQuery();
-
+    public ArrayList<Venda> buscarTodos() throws SQLException {
         ArrayList<Venda> vendas = new ArrayList<>();
+        String sql = "SELECT v.id, c.nome AS cliente_nome, v.data, v.total " +
+                "FROM vendas v " +
+                "JOIN clientes c ON v.clienteId = c.id";
 
-        while (rs.next()) {
-            Venda venda = new Venda(
-                    rs.getInt("id"),
-                    rs.getDate("data"),
-                    rs.getInt("clienteId"),
-                    FormaPagamento.valueOf(rs.getString("formaPagamento")),
-                    rs.getDouble("total")
-            );
-            vendas.add(venda);
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Venda venda = new Venda(
+                        rs.getInt("id"),
+                        rs.getString("cliente_nome"),
+                        rs.getDate("data"),
+                        rs.getDouble("total")
+                );
+                vendas.add(venda);
+            }
         }
-
         return vendas;
     }
 
@@ -140,7 +138,7 @@ public class VendasDAO implements DaoGenerics<Venda, String> {
     public ArrayList<Venda> buscarPorNomeCliente(String nomeCliente) throws ClassNotFoundException, SQLException {
         Connection c = ConnectionFactory.getConnection();
 
-        String sql = "SELECT * FROM vendas v JOIN clientes c ON v.cliente_id = c.id WHERE c.nome LIKE ?";
+        String sql = "SELECT * FROM vendas v JOIN clientes c ON v.clienteId = c.id WHERE c.nome LIKE ?";
         PreparedStatement pst = c.prepareStatement(sql);
         pst.setString(1, "%" + nomeCliente + "%");
 
