@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemVendaDAO implements DaoGenerics<ItemVenda, Integer> {
 
@@ -62,4 +63,35 @@ public class ItemVendaDAO implements DaoGenerics<ItemVenda, Integer> {
         // Implement delete logic if needed
         return null;
     }
+
+    public List<ItemVenda> buscarPorVenda(int vendaId) throws ClassNotFoundException, SQLException {
+        Connection c = ConnectionFactory.getConnection();
+
+        String sql = "SELECT iv.venda_id, p.nome, p.preco_venda " +
+                "FROM itens_venda iv " +
+                "INNER JOIN produtos p ON iv.produto_id = p.id " +
+                "WHERE iv.venda_id = ?";
+
+        PreparedStatement pst = c.prepareStatement(sql);
+        pst.setInt(1, vendaId);
+
+        ResultSet rs = pst.executeQuery();
+        List<ItemVenda> itensVenda = new ArrayList<>();
+
+        while (rs.next()) {
+            ItemVenda itemVenda = new ItemVenda(
+                    rs.getInt("venda_id"),
+                    rs.getString("nome"),
+                    rs.getBigDecimal("preco_venda")
+            );
+            itensVenda.add(itemVenda);
+        }
+
+        rs.close();
+        pst.close();
+        c.close();
+
+        return itensVenda;
+    }
+
 }

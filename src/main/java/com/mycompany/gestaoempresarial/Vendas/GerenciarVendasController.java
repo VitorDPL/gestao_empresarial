@@ -145,6 +145,13 @@ public class GerenciarVendasController implements Initializable {
         botaoEncontrarClientes.setOnAction(event -> abrirGerenciarClientesView());
         botaoEncontrarProdutos.setOnAction(event -> abrirGerenciarProdutosView());
 
+        // Adiciona evento de clique na tabela de vendas
+        tabelaVendas.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                abrirItensVendaView();
+            }
+        });
+
         carregarTodasVendas();
         atualizarTotais();
     }
@@ -231,6 +238,7 @@ public class GerenciarVendasController implements Initializable {
         labelTotalLiquido.setText(String.format("Total Líquido: %.2f", totalLiquido));
         labelTotalBruto.setText(String.format("Total Bruto: %.2f", totalBruto));
     }
+
     private void adicionarVenda() {
         String cpfCliente = campoCpfCliente.getText().trim();
         if (cpfCliente.isEmpty()) {
@@ -302,6 +310,30 @@ public class GerenciarVendasController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao abrir a tela de gerenciamento de produtos.");
+        }
+    }
+
+    private void abrirItensVendaView() {
+        Venda vendaSelecionada = tabelaVendas.getSelectionModel().getSelectedItem();
+        if (vendaSelecionada == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Atenção", "Selecione uma venda para visualizar os itens.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/gestaoempresarial/itensVendaView.fxml"));
+            Parent root = loader.load();
+
+            ItensVendaController controller = loader.getController();
+            controller.setVenda(vendaSelecionada);
+
+            Stage stage = new Stage();
+            stage.setTitle("Itens da Venda");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao abrir a tela de itens da venda.");
         }
     }
 

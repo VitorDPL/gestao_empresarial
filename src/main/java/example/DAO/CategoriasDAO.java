@@ -110,7 +110,7 @@ public class CategoriasDAO implements DaoGenerics<Categoria, String> {
 
     public static void main(String[] args) {
         CategoriasDAO categoriasDAO = new CategoriasDAO();
-        Categoria categoria = new Categoria(2, "Categoria 2", "Descrição da categoria 2");
+        Categoria categoria = new Categoria(3, "Site Saúde", "Site de saúde bucal");
         try {
             categoriasDAO.inserir(categoria);
             System.out.println("Categoria inserida com sucesso!");

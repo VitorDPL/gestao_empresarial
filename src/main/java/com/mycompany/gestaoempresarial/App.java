@@ -31,6 +31,9 @@ public class App extends Application {
         // Define o tamanho mínimo, mas sem limitar o máximo
         configurarJanela(stage, 900, 700);
 
+        // Define a janela para abrir maximizada
+        stage.setMaximized(true);
+
         stage.show();
     }
 
@@ -47,7 +50,6 @@ public class App extends Application {
     public static void configurarJanela(Stage stage, int minMaxWidth, int minMaxHeight) {
         stage.setMinWidth(minMaxWidth);
         stage.setMinHeight(minMaxHeight);
-
     }
 
     public static void main(String[] args) {
