@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="847.0" prefWidth="1291.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.PrimaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="1463.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.PrimaryController">
 
    <children>
       <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="542.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -32,7 +32,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Label alignment="CENTER" layoutX="-8.0" layoutY="27.0" prefHeight="45.0" prefWidth="563.0" style="-fx-background-color: #002d62;" text="Gestão Empresarial - AV DEV" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="-8.0" AnchorPane.rightAnchor="8.0">
+      <Label alignment="CENTER" layoutX="-8.0" layoutY="27.0" prefHeight="46.0" prefWidth="1471.0" style="-fx-background-color: #002d62;" text="Gestão Empresarial - AV DEV" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="-8.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -66,14 +66,14 @@
             <Image url="@../../../images/cart.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="1231.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="1403.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/software.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutY="73.0" prefHeight="778.0" prefWidth="299.0">
+      <AnchorPane layoutY="73.0" prefHeight="778.0" prefWidth="299.0" style="-fx-background-color: #f5f3da;">
          <children>
-            <ImageView fitHeight="778.0" fitWidth="299.0" layoutX="4.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="778.0" fitWidth="299.0" layoutX="2.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/manager.png" />
                </image>
@@ -88,6 +88,16 @@
       <ImageView fitHeight="87.0" fitWidth="87.0" layoutX="642.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/data.png" />
+         </image>
+      </ImageView>
+      <Button alignment="BASELINE_RIGHT" layoutX="404.0" layoutY="504.0" mnemonicParsing="false" onAction="#gerenciarFornecedores" prefHeight="156.0" prefWidth="223.0" text="Gerenciar Fornecedores">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="79.0" fitWidth="73.0" layoutX="404.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/truck.png" />
          </image>
       </ImageView>
    </children>

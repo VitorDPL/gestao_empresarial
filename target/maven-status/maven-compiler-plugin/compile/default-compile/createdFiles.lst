@@ -1,3 +1,4 @@
+com\mycompany\gestaoempresarial\Fornecedores\GerenciarFornecedoresController.class
 com\mycompany\gestaoempresarial\App.class
 com\mycompany\gestaoempresarial\Vendas\ItemVenda.class
 com\mycompany\gestaoempresarial\clientes\Cliente.class
@@ -12,9 +13,11 @@ com\mycompany\gestaoempresarial\Vendas\FormaPagamento.class
 com\mycompany\gestaoempresarial\clientes\VendasClientesController.class
 example\DAO\ProdutosDAO.class
 com\mycompany\gestaoempresarial\clientes\Segmento.class
+com\mycompany\gestaoempresarial\Fornecedores\Fornecedor.class
 example\DAO\VendasDAO.class
 example\DAO\DaoGenerics.class
 example\DAO\CategoriasDAO.class
+example\DAO\FornecedoresDAO.class
 com\mycompany\gestaoempresarial\PrimaryController.class
 com\mycompany\gestaoempresarial\Vendas\Venda.class
 example\DAO\ItemVendaDAO.class

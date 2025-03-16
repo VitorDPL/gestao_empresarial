@@ -52,7 +52,7 @@
       <TableView fx:id="tabelaVendas" layoutX="8.0" layoutY="115.0" prefHeight="363.0" prefWidth="502.0">
          <columns>
             <TableColumn fx:id="colunaIdVenda" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="colunaNomeCliente" prefWidth="75.0" text="Nome Cliente" />
+            <TableColumn fx:id="colunaNomeCliente" prefWidth="225.0" text="Nome Cliente" />
             <TableColumn fx:id="colunaDataVenda" prefWidth="75.0" text="Data Venda" />
             <TableColumn fx:id="colunaTotalVenda" prefWidth="75.0" text="Total Venda" />
          </columns>
@@ -76,11 +76,11 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="labelTotalLiquido" layoutX="646.0" layoutY="337.0" style="-fx-background-color: green;" text="Total Líquido: 0.00" textFill="WHITE">
+      <Label fx:id="labelTotalLiquido" layoutX="526.0" layoutY="337.0" style="-fx-background-color: white;" text="Total Líquido: 0.00">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label fx:id="labelTotalBruto" layoutX="793.0" layoutY="337.0" style="-fx-background-color: green;" text="Total Bruto: 0.00" textFill="WHITE">
+      <Label fx:id="labelTotalBruto" layoutX="927.0" layoutY="337.0" style="-fx-background-color: white;" text="Total Bruto: 0.00">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -106,17 +106,17 @@
             <Font name="System Bold" size="12.0" />
          </font></Button>
 
-      <Label fx:id="labelTotalLiquidoRealizadas" layoutX="14.0" layoutY="500.0" style="-fx-background-color: green;" text="Total Líquido (Vendas JÁ REALIZADAS): 0.00" textFill="WHITE">
+      <Label fx:id="labelTotalLiquidoRealizadas" layoutX="12.0" layoutY="490.0" prefHeight="20.0" prefWidth="186.0" style="-fx-background-color: white;" text="Total Líquido: 0.00">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="labelTotalBrutoRealizadas" layoutX="300.0" layoutY="500.0" style="-fx-background-color: green;" text="Total Bruto (Vendas JÁ REALIZADAS): 0.00" textFill="WHITE">
+      <Label fx:id="labelTotalBrutoRealizadas" layoutX="376.0" layoutY="490.0" prefHeight="20.0" prefWidth="133.0" style="-fx-background-color: white;" text="Total Bruto : 0.00">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="deletarVendaSelecionada" layoutX="14.0" layoutY="520.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="488.0" style="-fx-background-color: red;" text="Deletar Venda Selecionada" textFill="WHITE" onAction="#deletarVendaSelecionada">
+      <Button fx:id="deletarVendaSelecionada" layoutX="14.0" layoutY="520.0" mnemonicParsing="false" onAction="#deletarVendaSelecionada" prefHeight="26.0" prefWidth="496.0" style="-fx-background-color: red;" text="Deletar Venda Selecionada" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

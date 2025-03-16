@@ -59,4 +59,17 @@ public class PrimaryController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    @FXML
+    private void gerenciarFornecedores() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(("gerenciarFornecedoresView.fxml")));
+
+        Stage stage = new Stage();
+        stage.setTitle("Gerenciar Fornecedores");
+
+        App.configurarJanela(stage, 900, 600);
+
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }

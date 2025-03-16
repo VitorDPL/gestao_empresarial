@@ -140,7 +140,10 @@ public class VendasDAO implements DaoGenerics<Venda, String> {
     public ArrayList<Venda> buscarPorNomeCliente(String nomeCliente) throws ClassNotFoundException, SQLException {
         Connection c = ConnectionFactory.getConnection();
 
-        String sql = "SELECT * FROM vendas v JOIN clientes c ON v.clienteId = c.id WHERE c.nome LIKE ?";
+        String sql = "SELECT v.id, c.nome AS cliente_nome, v.data, v.total " +
+                "FROM vendas v " +
+                "JOIN clientes c ON v.clienteId = c.id " +
+                "WHERE c.nome LIKE ?";
         PreparedStatement pst = c.prepareStatement(sql);
         pst.setString(1, "%" + nomeCliente + "%");
 
@@ -150,11 +153,10 @@ public class VendasDAO implements DaoGenerics<Venda, String> {
 
         while (rs.next()) {
             Venda venda = new Venda(
-                    rs.getInt("v.id"),
-                    rs.getDate("v.data"),
-                    rs.getInt("v.clienteId"),
-                    FormaPagamento.valueOf(rs.getString("v.formaPagamento")),
-                    rs.getDouble("v.total")
+                    rs.getInt("id"),
+                    rs.getString("cliente_nome"),
+                    rs.getDate("data"),
+                    rs.getDouble("total")
             );
             vendas.add(venda);
         }

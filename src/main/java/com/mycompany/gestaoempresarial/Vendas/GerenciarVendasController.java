@@ -7,6 +7,7 @@ import example.DAO.VendasDAO;
 import example.DAO.ProdutosDAO;
 import example.DAO.ClientesDAO;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -140,7 +141,14 @@ public class GerenciarVendasController implements Initializable {
         tabelaProdutos.setItems(listaProdutos);
 
         // Ação do botão de pesquisa
-        botaoFiltrar.setOnAction(event -> pesquisarVenda());
+        botaoFiltrar.setOnAction(event -> {
+            try {
+                pesquisarVenda();
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao buscar venda.");
+            }
+        });
 
         // Ação do botão adicionar item
         botaoAdicionarItem.setOnAction(event -> adicionarItem());
@@ -186,36 +194,55 @@ public class GerenciarVendasController implements Initializable {
         }
     }
 
-    private void pesquisarVenda() {
+    private void pesquisarVenda() throws SQLException, ClassNotFoundException {
         String valorPesquisa = campoPesquisa.getText().trim();
 
+        VendasDAO vendasDAO = new VendasDAO();
+        ObservableList<Venda> vendasEncontradas = FXCollections.observableArrayList();
+
         if (valorPesquisa.isEmpty()) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Atenção", "Digite um nome ou data para pesquisar.");
-            return;
-        }
-
-        try {
-            ObservableList<Venda> vendasEncontradas = FXCollections.observableArrayList();
-
-            VendasDAO vendasDAO = new VendasDAO();
+            vendasEncontradas.addAll(vendasDAO.buscarTodos());
+        } else {
             if (radioNomeCliente.isSelected()) {
                 vendasEncontradas.addAll(vendasDAO.buscarPorNomeCliente(valorPesquisa));
             } else if (radioDataVenda.isSelected()) {
                 vendasEncontradas.addAll(vendasDAO.buscarPorDataVenda(valorPesquisa));
             }
+        }
 
-            if (!vendasEncontradas.isEmpty()) {
-                listaVendas.setAll(vendasEncontradas);
-            } else {
-                listaVendas.clear();
-                mostrarAlerta(Alert.AlertType.INFORMATION, "Venda não encontrada", "Nenhuma venda encontrada.");
+        if (!vendasEncontradas.isEmpty()) {
+            listaVendas.setAll(vendasEncontradas);
+            atualizarTotaisVendasFiltradas(vendasEncontradas);
+        } else {
+            listaVendas.clear();
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Venda não encontrada", "Nenhuma venda encontrada.");
+        }
+    }
+
+    private void atualizarTotaisVendasFiltradas(List<Venda> vendasFiltradas) {
+        try {
+            double totalBruto = 0.0;
+            double totalLiquido = 0.0;
+
+            VendasDAO vendasDAO = new VendasDAO();
+            for (Venda venda : vendasFiltradas) {
+                List<ItemVenda> itensVenda = vendasDAO.buscarItensPorVendaId(venda.getId());
+                for (ItemVenda item : itensVenda) {
+                    Produto produto = vendasDAO.buscarProdutoPorId(item.getProdutoId());
+                    double precoVenda = produto.getPreco_venda();
+                    double precoCompra = produto.getPreco_compra();
+                    double lucroProduto = precoVenda - precoCompra;
+
+                    totalBruto += precoVenda;
+                    totalLiquido += lucroProduto;
+                }
             }
 
-            atualizarTotaisVendasRealizadas();
-
+            labelTotalLiquidoRealizadas.setText(String.format("Total Líquido: %.2f", totalLiquido));
+            labelTotalBrutoRealizadas.setText(String.format("Total Bruto: %.2f", totalBruto));
         } catch (Exception e) {
             e.printStackTrace();
-            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao buscar venda.");
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao calcular os totais das vendas filtradas.");
         }
     }
 
@@ -399,8 +426,8 @@ public class GerenciarVendasController implements Initializable {
                 }
             }
 
-            labelTotalLiquidoRealizadas.setText(String.format("Total Líquido (Vendas JÁ REALIZADAS): %.2f", totalLiquidoRealizadas));
-            labelTotalBrutoRealizadas.setText(String.format("Total Bruto (Vendas JÁ REALIZADAS): %.2f", totalBrutoRealizadas));
+            labelTotalLiquidoRealizadas.setText(String.format("Total Líquido: %.2f", totalLiquidoRealizadas));
+            labelTotalBrutoRealizadas.setText(String.format("Total Bruto: %.2f", totalBrutoRealizadas));
         } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao calcular os totais das vendas já realizadas.");
