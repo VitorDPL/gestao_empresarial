@@ -57,11 +57,11 @@ public class ProdutosFornecidosPorFornecedorController {
         colunaCodigoProduto.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         colunaNomeProduto.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colunaDescricaoProduto.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        colunaCategoriaProduto.setCellValueFactory(new PropertyValueFactory<>("categoriaId"));
-        colunaPrecoCompraProduto.setCellValueFactory(new PropertyValueFactory<>("precoCompra"));
-        colunaPrecoVendaProduto.setCellValueFactory(new PropertyValueFactory<>("precoVenda"));
-        colunaLucroProduto.setCellValueFactory(new PropertyValueFactory<>("lucroProduto"));
+        colunaCategoriaProduto.setCellValueFactory(new PropertyValueFactory<>("categoria_id"));
+        colunaPrecoCompraProduto.setCellValueFactory(new PropertyValueFactory<>("preco_compra"));
+        colunaPrecoVendaProduto.setCellValueFactory(new PropertyValueFactory<>("preco_venda"));
+        colunaLucroProduto.setCellValueFactory(new PropertyValueFactory<>("lucro_produto"));
         colunaCustoProduto.setCellValueFactory(new PropertyValueFactory<>("custo"));
-        colunaEstoqueAtualProduto.setCellValueFactory(new PropertyValueFactory<>("estoqueAtual"));
+        colunaEstoqueAtualProduto.setCellValueFactory(new PropertyValueFactory<>("estoque_atual"));
     }
 }
