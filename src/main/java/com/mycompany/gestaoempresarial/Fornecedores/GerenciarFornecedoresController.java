@@ -2,6 +2,8 @@ package com.mycompany.gestaoempresarial.Fornecedores;
 
 import com.mycompany.gestaoempresarial.Fornecedores.Fornecedor;
 import example.DAO.FornecedoresDAO;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -19,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
 public class GerenciarFornecedoresController implements Initializable {
@@ -93,6 +96,15 @@ public class GerenciarFornecedoresController implements Initializable {
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
                 mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao buscar fornecedor.");
+            }
+        });
+
+        tabelaFornecedores.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+                Fornecedor fornecedorSelecionado = tabelaFornecedores.getSelectionModel().getSelectedItem();
+                if (fornecedorSelecionado != null) {
+                    abrirProdutosFornecidosView(fornecedorSelecionado);
+                }
             }
         });
 
@@ -201,6 +213,25 @@ public class GerenciarFornecedoresController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar os fornecedores.");
+        }
+    }
+
+    private void abrirProdutosFornecidosView(Fornecedor fornecedor) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/gestaoempresarial/produtosFornecidosPorFornecedorView.fxml"));
+            Parent root = loader.load();
+
+            // Passar o fornecedor selecionado para o controlador da nova view
+            ProdutosFornecidosPorFornecedorController controller = loader.getController();
+            controller.setFornecedor(fornecedor);
+
+            Stage stage = new Stage();
+            stage.setTitle("Produtos Fornecidos");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Não foi possível abrir a view de produtos fornecidos.");
         }
     }
 

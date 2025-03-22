@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="900" maxWidth="1200" minHeight="530.0" minWidth="900" prefHeight="556.0" prefWidth="1040.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.Produtos.GerenciarProdutosController">
+<AnchorPane maxHeight="900" maxWidth="1200" minHeight="530.0" minWidth="900" prefHeight="598.0" prefWidth="1040.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.gestaoempresarial.Produtos.GerenciarProdutosController">
    <children>
       <!-- Menu -->
       <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -95,13 +95,13 @@
          </font>
       </Label>
       <TextField fx:id="quantidadeField" layoutX="711.0" layoutY="458.0" prefHeight="26.0" prefWidth="310.0" AnchorPane.rightAnchor="18.600000000000023" />
-      <Button fx:id="botaoCadastrarProduto" layoutX="711.0" layoutY="515.0" mnemonicParsing="false" onAction="#cadastrarProduto" prefHeight="26.0" prefWidth="310.0" style="-fx-background-color: green;" text="Cadastrar" textFill="WHITE">
+      <Button fx:id="botaoCadastrarProduto" layoutX="711.0" layoutY="557.0" mnemonicParsing="false" onAction="#cadastrarProduto" prefHeight="26.0" prefWidth="310.0" style="-fx-background-color: green;" text="Cadastrar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
       <Button layoutX="993.0" layoutY="400.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" text="+" />
-      <TableView fx:id="tabelaProdutos" layoutX="14.0" layoutY="92.0" prefHeight="390.0" prefWidth="682.0">
+      <TableView fx:id="tabelaProdutos" layoutX="14.0" layoutY="92.0" prefHeight="454.0" prefWidth="682.0">
          <columns>
             <TableColumn fx:id="colunaId" prefWidth="75.0" text="ID" />
             <TableColumn fx:id="colunaNome" prefWidth="75.0" text="Nome" />
@@ -109,14 +109,22 @@
             <TableColumn fx:id="colunaPrecoCompra" prefWidth="75.0" text="Preço de Compra" />
             <TableColumn fx:id="colunaPrecoVenda" prefWidth="75.0" text="Preço de Venda" />
             <TableColumn fx:id="colunaLucro" prefWidth="75.0" text="Lucro" />
+            <TableColumn fx:id="colunaNomeFornecedor" prefWidth="150.0" text="Nome Fornecedor" />
          </columns>
       </TableView>
-      <Button fx:id="botaoSalvar" layoutX="14.0" layoutY="516.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="235.0" text="Editar Infomações" />
-      <Button fx:id="botaoDeletar" layoutX="389.0" layoutY="516.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="235.0" text="Deletar Produto" />
+      <Button fx:id="botaoSalvar" layoutX="14.0" layoutY="557.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="235.0" text="Editar Infomações" />
+      <Button fx:id="botaoDeletar" layoutX="384.0" layoutY="557.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="235.0" text="Deletar Produto" />
       <RadioButton fx:id="radioNome" layoutX="132.0" layoutY="49.0" mnemonicParsing="false" text="Nome Produto" />
       <RadioButton fx:id="radioCod" layoutX="12.0" layoutY="49.0" mnemonicParsing="false" text="Código Produto" />
       <TextField fx:id="campoPesquisa" layoutX="253.0" layoutY="45.0" prefHeight="26.0" prefWidth="182.0" />
       <Button fx:id="botaoPesquisar" layoutX="451.0" layoutY="45.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="101.0" text="Pesquisar" />
+      <TextField fx:id="idFornecedorField" layoutX="711.0" layoutY="519.0" prefHeight="26.0" prefWidth="262.0" />
+      <Label layoutX="712.0" layoutY="499.0" text="ID Fornecedor:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="993.0" fx:id="botaoAbrirFornecedores" layoutY="519.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" text="i" />
 
    </children>
 </AnchorPane>

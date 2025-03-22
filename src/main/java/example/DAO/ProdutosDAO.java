@@ -28,7 +28,7 @@ public class ProdutosDAO implements DaoGenerics<Produto, String> {
                 }
             } else {
                 // Produto não existe, realiza a inserção
-                try (PreparedStatement insertStmt = c.prepareStatement(insertSql)) {
+                try (PreparedStatement insertStmt = c.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
                     insertStmt.setString(1, obj.getNome());
                     insertStmt.setString(2, obj.getCodigo());
                     insertStmt.setString(3, obj.getDescricao());
@@ -39,6 +39,13 @@ public class ProdutosDAO implements DaoGenerics<Produto, String> {
                     insertStmt.setDouble(8, obj.getCusto());
                     insertStmt.setInt(9, obj.getEstoque_atual());
                     insertStmt.executeUpdate();
+
+                    // Obter o ID do produto recém-inserido
+                    try (ResultSet generatedKeys = insertStmt.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            obj.setId(generatedKeys.getInt(1));
+                        }
+                    }
                 }
             }
         } catch (SQLException e) {

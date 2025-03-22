@@ -13,6 +13,7 @@ public class Produto {
     private double lucro_produto;
     private double custo;
     private int estoque_atual;
+    private String nomeFornecedor;
 
     public Produto(int id, String nome, String codigo, String descricao, int categoria_id, int preco_compra, double preco_venda, double lucro_produto, double custo, int estoque_atual, Date date) {
         this.id = id;
@@ -32,6 +33,29 @@ public class Produto {
         this.nome = nome;
         this.preco_compra = preco_compra;
         this.preco_venda = preco_venda;
+    }
+
+    public Produto(int id, String nome, String codigo, int preco_compra, double preco_venda, double lucro_produto, String nomeFornecedor) {
+        this.id = id;
+        this.nome = nome;
+        this.codigo = codigo;
+        this.preco_compra = preco_compra;
+        this.preco_venda = preco_venda;
+        this.lucro_produto = lucro_produto;
+        this.nomeFornecedor = nomeFornecedor;
+    }
+
+    public Produto(int id, String nome, String codigo, String descricao, int categoria_id, int preco_compra, double preco_venda, double lucro_produto, double custo, int estoque_atual) {
+        this.id = id;
+        this.nome = nome;
+        this.codigo = codigo;
+        this.descricao = descricao;
+        this.categoria_id = categoria_id;
+        this.preco_compra = preco_compra;
+        this.preco_venda = preco_venda;
+        this.lucro_produto = lucro_produto;
+        this.custo = custo;
+        this.estoque_atual = estoque_atual;
     }
 
     public int getId() {
@@ -113,4 +137,13 @@ public class Produto {
     public void setEstoque_atual(int estoque_atual) {
         this.estoque_atual = estoque_atual;
     }
+
+    public String getNomeFornecedor() {
+        return nomeFornecedor;
+    }
+
+    public void setNomeFornecedor(String nomeFornecedor) {
+        this.nomeFornecedor = nomeFornecedor;
+    }
+
 }

@@ -104,9 +104,9 @@ public class FornecedoresDAO implements DaoGenerics<Fornecedor, String> {
 
     public Fornecedor buscarPorNome(String nome) throws SQLException {
         Connection c = ConnectionFactory.getConnection();
-        String sql = "SELECT * FROM fornecedores WHERE nome = ?";
+        String sql = "SELECT * FROM fornecedores WHERE nome LIKE ?";
         PreparedStatement pst = c.prepareStatement(sql);
-        pst.setString(1, nome);
+        pst.setString(1, "%" + nome + "%");
         ResultSet rs = pst.executeQuery();
 
         Fornecedor fornecedor = null;
@@ -163,6 +163,27 @@ public class FornecedoresDAO implements DaoGenerics<Fornecedor, String> {
 
         return obj;
     }
+
+    public Fornecedor buscarPorId(int fornecedorId) throws SQLException {
+        String sql = "SELECT * FROM fornecedores WHERE id = ?";
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, fornecedorId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Fornecedor(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("cnpj"),
+                        rs.getString("endereco"),
+                        rs.getString("telefone"),
+                        rs.getString("email")
+                );
+            }
+        }
+        return null;
+    }
+
 
     public static void main(String[] args) {
         try {

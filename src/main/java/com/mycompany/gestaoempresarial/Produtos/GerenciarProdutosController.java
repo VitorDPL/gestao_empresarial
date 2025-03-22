@@ -1,17 +1,28 @@
 package com.mycompany.gestaoempresarial.Produtos;
 
+import com.mycompany.gestaoempresarial.App;
+import com.mycompany.gestaoempresarial.Fornecedores.Fornecedor;
 import example.DAO.CategoriasDAO;
+import example.DAO.FornecedoresDAO;
 import example.DAO.ProdutosDAO;
+import example.DAO.ProdutosFornecidosDAO;
+import com.mycompany.gestaoempresarial.Fornecedores.ProdutoFornecido;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -22,6 +33,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class GerenciarProdutosController implements Initializable {
 
@@ -88,7 +100,15 @@ public class GerenciarProdutosController implements Initializable {
     @FXML
     private TableColumn<Produto, Double> colunaLucro;
 
+    @FXML
+    private TextField idFornecedorField;
+
+    @FXML
+    private Button botaoAbrirFornecedores;
+
     private ObservableList<Produto> listaProdutos = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<Produto, String> colunaNomeFornecedor;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -104,6 +124,7 @@ public class GerenciarProdutosController implements Initializable {
         colunaPrecoCompra.setCellValueFactory(new PropertyValueFactory<>("preco_compra"));
         colunaPrecoVenda.setCellValueFactory(new PropertyValueFactory<>("preco_venda"));
         colunaLucro.setCellValueFactory(new PropertyValueFactory<>("lucro_produto"));
+        colunaNomeFornecedor.setCellValueFactory(new PropertyValueFactory<>("nomeFornecedor"));
 
         tabelaProdutos.setItems(listaProdutos);
 
@@ -122,6 +143,14 @@ public class GerenciarProdutosController implements Initializable {
                 cadastrarProduto();
             } catch (SQLException ex) {
                 Logger.getLogger(GerenciarProdutosController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        botaoAbrirFornecedores.setOnAction(event -> {
+            try {
+                abrirViewFornecedores();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         });
 
@@ -145,7 +174,7 @@ public class GerenciarProdutosController implements Initializable {
         String valorPesquisa = campoPesquisa.getText().trim();
 
         if (valorPesquisa.isEmpty()) {
-            mostrarAlerta(AlertType.WARNING, "Atenção", "Digite um nome ou código para pesquisar.");
+            carregarTodosProdutos();
             return;
         }
 
@@ -186,6 +215,7 @@ public class GerenciarProdutosController implements Initializable {
             String precoCompraStr = precoCompraField.getText().trim();
             String precoVendaStr = precoVendaField.getText().trim();
             String quantidadeStr = quantidadeField.getText().trim();
+            int idFornecedor = Integer.parseInt(idFornecedorField.getText().trim());
 
             if (!nome.isEmpty()) {
                 produtoSelecionado.setNome(nome);
@@ -209,7 +239,6 @@ public class GerenciarProdutosController implements Initializable {
                 produtoSelecionado.setEstoque_atual(quantidade);
             }
 
-            // Recalculate lucro_produto if preco_compra or preco_venda is updated
             if (!precoCompraStr.isEmpty() || !precoVendaStr.isEmpty()) {
                 double precoCompra = produtoSelecionado.getPreco_compra();
                 double precoVenda = produtoSelecionado.getPreco_venda();
@@ -219,6 +248,12 @@ public class GerenciarProdutosController implements Initializable {
 
             ProdutosDAO produtosDAO = new ProdutosDAO();
             produtosDAO.editar(produtoSelecionado, String.valueOf(produtoSelecionado.getId()));
+
+            // Atualizar a tabela produtos_fornecidos
+            ProdutosFornecidosDAO produtosFornecidosDAO = new ProdutosFornecidosDAO();
+            ProdutoFornecido produtoFornecido = new ProdutoFornecido(0, idFornecedor, produtoSelecionado.getId());
+            produtosFornecidosDAO.inserir(produtoFornecido);
+
             mostrarAlerta(AlertType.INFORMATION, "Sucesso", "Produto editado com sucesso.");
             carregarTodosProdutos();
         } catch (NumberFormatException e) {
@@ -250,7 +285,23 @@ public class GerenciarProdutosController implements Initializable {
     private void carregarTodosProdutos() {
         try {
             ProdutosDAO produtosDAO = new ProdutosDAO();
-            listaProdutos.setAll(produtosDAO.buscarTodos());
+            List<Produto> produtos = produtosDAO.buscarTodos();
+
+            // Para cada produto, buscar o nome do fornecedor
+            ProdutosFornecidosDAO produtosFornecidosDAO = new ProdutosFornecidosDAO();
+            FornecedoresDAO fornecedoresDAO = new FornecedoresDAO();
+
+            for (Produto produto : produtos) {
+                ProdutoFornecido produtoFornecido = produtosFornecidosDAO.buscarPorProdutoId(produto.getId());
+                if (produtoFornecido != null) {
+                    Fornecedor fornecedor = fornecedoresDAO.buscarPorId(produtoFornecido.getFornecedorId());
+                    if (fornecedor != null) {
+                        produto.setNomeFornecedor(fornecedor.getNome());
+                    }
+                }
+            }
+
+            listaProdutos.setAll(produtos);
         } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta(AlertType.ERROR, "Erro", "Não foi possível carregar os produtos.");
@@ -275,6 +326,7 @@ public class GerenciarProdutosController implements Initializable {
             double precoVenda = Double.parseDouble(precoVendaField.getText());
             int categoriaId = categoriaComboBox.getSelectionModel().getSelectedIndex() + 1;
             int quantidade = Integer.parseInt(quantidadeField.getText());
+            int fornecedorId = Integer.parseInt(idFornecedorField.getText().trim());
 
             double lucroProduto = precoVenda - precoCompra;
             double custo = precoCompra * quantidade;
@@ -283,11 +335,34 @@ public class GerenciarProdutosController implements Initializable {
 
             ProdutosDAO produtosDAO = new ProdutosDAO();
             produtosDAO.inserir(produto);
+
+            // Obter o ID do produto recém-inserido
+            int produtoId = produto.getId();
+
+            // Inserir na tabela produtos_fornecidos
+            ProdutosFornecidosDAO produtosFornecidosDAO = new ProdutosFornecidosDAO();
+            ProdutoFornecido produtoFornecido = new ProdutoFornecido(0, fornecedorId, produtoId);
+            produtosFornecidosDAO.inserir(produtoFornecido);
+
             mostrarAlerta(AlertType.INFORMATION, "Sucesso", "Produto cadastrado com sucesso.");
             carregarTodosProdutos();
         } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta(AlertType.ERROR, "Erro", "Erro ao cadastrar produto: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void abrirViewFornecedores() throws IOException {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/mycompany/gestaoempresarial/gerenciarFornecedoresView.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Gerenciar Fornecedores");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao abrir a tela de gerenciamento de fornecedores.");
         }
     }
 }

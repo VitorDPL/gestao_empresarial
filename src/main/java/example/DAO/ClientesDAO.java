@@ -115,15 +115,15 @@ public class ClientesDAO implements DaoGenerics<Cliente, String> {
 
     public Cliente buscarPorNome(String nome) throws SQLException {
         Connection c = ConnectionFactory.getConnection();
-        String sql = "SELECT * FROM clientes WHERE nome = ?";
+        String sql = "SELECT * FROM clientes WHERE nome LIKE ?";
         PreparedStatement pst = c.prepareStatement(sql);
-        pst.setString(1, nome);
+        pst.setString(1, "%" + nome + "%");
         ResultSet rs = pst.executeQuery();
 
         Cliente cliente = null;
         if (rs.next()) {
             cliente = new Cliente(
-                    rs.getInt("id"), // Ensure the ID is set
+                    rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getString("cpf_cnpj"),
                     rs.getString("endereco"),
