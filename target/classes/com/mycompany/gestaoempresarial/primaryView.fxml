@@ -82,7 +82,7 @@
             <BorderPane layoutX="2.0" layoutY="2.0" prefHeight="701.0" prefWidth="299.0" />
          </children>
       </AnchorPane>
-      <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="319.0" layoutY="609.0" mnemonicParsing="false" onAction="#gerenciarVendas" prefHeight="102.0" prefWidth="1134.0" text="Gerenciar Relatórios" textAlignment="RIGHT" AnchorPane.leftAnchor="319.0" AnchorPane.rightAnchor="11.400000000000091" AnchorPane.topAnchor="609.0">
+      <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="319.0" layoutY="609.0" mnemonicParsing="false" onAction="#gerenciarRelatorios" prefHeight="102.0" prefWidth="1134.0" text="Gerenciar Relatórios" textAlignment="RIGHT" AnchorPane.leftAnchor="319.0" AnchorPane.rightAnchor="11.400000000000091" AnchorPane.topAnchor="609.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

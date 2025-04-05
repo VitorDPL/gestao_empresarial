@@ -12,6 +12,7 @@ module com.mycompany.gestaoempresarial {
     opens com.mycompany.gestaoempresarial.Produtos to javafx.fxml;  
     opens com.mycompany.gestaoempresarial.Vendas to javafx.fxml;
     opens com.mycompany.gestaoempresarial.Fornecedores to javafx.fxml;
+    opens com.mycompany.gestaoempresarial.Relatorios to javafx.fxml;
     
     // Exportar os pacotes necessários
     exports com.mycompany.gestaoempresarial;
@@ -19,4 +20,5 @@ module com.mycompany.gestaoempresarial {
     exports com.mycompany.gestaoempresarial.Produtos; 
     exports com.mycompany.gestaoempresarial.Vendas;
     exports com.mycompany.gestaoempresarial.Fornecedores;
+    exports com.mycompany.gestaoempresarial.Relatorios;
 }

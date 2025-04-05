@@ -1,12 +1,14 @@
 com\mycompany\gestaoempresarial\Fornecedores\GerenciarFornecedoresController.class
 com\mycompany\gestaoempresarial\App.class
 example\banco\ConnectionFactory.class
+com\mycompany\gestaoempresarial\Relatorios\Relatorio.class
 com\mycompany\gestaoempresarial\Vendas\GerenciarVendasController.class
 example\DAO\ClientesDAO.class
 com\mycompany\gestaoempresarial\clientes\VendasClientesController.class
 com\mycompany\gestaoempresarial\clientes\Segmento.class
 com\mycompany\gestaoempresarial\Fornecedores\Fornecedor.class
 example\DAO\DaoGenerics.class
+com\mycompany\gestaoempresarial\Relatorios\gerenciarRelatoriosController.class
 example\DAO\FornecedoresDAO.class
 com\mycompany\gestaoempresarial\Vendas\Venda.class
 com\mycompany\gestaoempresarial\Produtos\Produto.class

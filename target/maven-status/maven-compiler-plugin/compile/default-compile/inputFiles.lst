@@ -12,6 +12,7 @@ C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\com\mycompany\gestaoempres
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\module-info.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\com\mycompany\gestaoempresarial\clientes\EditarClientesController.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\com\mycompany\gestaoempresarial\clientes\VendasClientesController.java
+C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\com\mycompany\gestaoempresarial\Relatorios\Relatorio.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\com\mycompany\gestaoempresarial\Produtos\GerenciarProdutosController.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\com\mycompany\gestaoempresarial\Fornecedores\Fornecedor.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\example\DAO\CategoriasDAO.java
@@ -22,6 +23,7 @@ C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\example\banco\ConnectionFa
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\example\DAO\ProdutosDAO.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\example\DAO\ItemVendaDAO.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\com\mycompany\gestaoempresarial\Vendas\Venda.java
+C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\com\mycompany\gestaoempresarial\Relatorios\gerenciarRelatoriosController.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\com\mycompany\gestaoempresarial\App.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\example\DAO\FornecedoresDAO.java
 C:\Users\User\Desktop\GestaoEmpresarial\src\main\java\example\DAO\ClientesDAO.java

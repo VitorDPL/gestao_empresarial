@@ -52,4 +52,15 @@ public class PrimaryController {
         stage.sizeToScene(); // Ajusta o tamanho da janela ao conteúdo
         stage.show();
     }
+    
+    @FXML
+    private void gerenciarRelatorios() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("gerenciarRelatoriosView.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Gerenciar Fornecedores");
+        App.configurarJanela(stage, 900, 600);
+        stage.setScene(new Scene(root));
+        stage.sizeToScene(); // Ajusta o tamanho da janela ao conteúdo
+        stage.show();
+    }
 }
